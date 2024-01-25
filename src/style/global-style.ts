@@ -45,4 +45,8 @@ export const GlobalStyle = createGlobalStyle`
         color: #C4C4C4;
         text-decoration: line-through;
     }
+
+    .all-products {
+        font-weight: bold;
+    }
 `

@@ -6,6 +6,8 @@ import { Card } from '../../components/card'
 import { useEffect } from 'react'
 import { useProductsContext } from '../../context/productsContext'
 import { Footer } from '../../components/footer'
+import { IoSearchOutline } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
 
 export function Home() {
 	const {
@@ -25,6 +27,23 @@ export function Home() {
 					src={BannerImage1}
 					alt='banner'
 				/>
+				<S.SearchContainer>
+					<S.Category>
+						<S.Items>Camisas</S.Items>
+						<S.Items>Calças</S.Items>
+						<S.Items>Conjuntos</S.Items>
+						<S.Items>Vestidos</S.Items>
+						<S.Items>Kids</S.Items>
+						<S.Items className='all-products'>Ver tudo</S.Items>
+					</S.Category>
+					<S.Search>
+						<input
+							placeholder='Buscar produto'
+						/>
+						<IoSearchOutline/>
+					</S.Search>
+					
+				</S.SearchContainer>
 				<S.Title>	
 					Popular em Feminino
 				</S.Title>
