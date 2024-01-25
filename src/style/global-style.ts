@@ -33,11 +33,16 @@ export const GlobalStyle = createGlobalStyle`
 
     h2 {
         color: #191919;
-        font-size: 2rem;
+        font-size: 2.4rem;
     }
 
     h3 {
         color: #333333;
         font-size: 1.4rem;
+    }
+
+    .old_price {
+        color: #C4C4C4;
+        text-decoration: line-through;
     }
 `

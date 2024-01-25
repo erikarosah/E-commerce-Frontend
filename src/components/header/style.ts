@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.header`
-    width: 100vw;
+    height: 10vh;
     padding: 1rem;
     display: flex;
     align-items: center;
@@ -38,10 +38,7 @@ export const Section = styled.ul`
 export const Items = styled.li`
     font-size: 1.4rem;
     color: #2B2C2D;
-    font-weight: 300;
-    transition: border ease-in;
     cursor: pointer;
-    border-bottom: 2px solid transparent;
     position: relative;
     font-weight: bold;
     border-bottom: 2px solid transparent;
