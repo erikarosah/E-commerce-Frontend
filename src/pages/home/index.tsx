@@ -5,6 +5,7 @@ import BannerImage2 from '../../assets/banner-2-dt.jpg'
 import { Card } from '../../components/card'
 import { useEffect } from 'react'
 import { useProductsContext } from '../../context/productsContext'
+import { Footer } from '../../components/footer'
 
 export function Home() {
 	const {
@@ -60,6 +61,7 @@ export function Home() {
 						))
 					} 
 				</S.Content>
+				<Footer/>
 			</S.Container>
 		</>
 	)

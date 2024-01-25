@@ -7,6 +7,7 @@ export const Container = styled.main`
 `
 export const Banner = styled.img`
     width: 100%;
+    margin-top: 10vh;
     height: 80vh;
     cursor: pointer;
 `
