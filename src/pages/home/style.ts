@@ -43,6 +43,8 @@ export const Search = styled.div`
    > input {
         border: none;  
         font-weight: bold;
+        color: #434343;
+        background-color: transparent;
     }
 
     > svg {

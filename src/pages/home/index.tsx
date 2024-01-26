@@ -3,13 +3,33 @@ import * as S from './style'
 import BannerImage1 from '../../assets/banner-1-dt.jpg'
 import BannerImage2 from '../../assets/banner-2-dt.jpg'
 import { Card } from '../../components/card'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useProductsContext } from '../../context/productsContext'
 import { Footer } from '../../components/footer'
 import { IoSearchOutline } from 'react-icons/io5'
+import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 export function Home() {
+	const [ query, setQuery ] = useState('')
+
+	function handlePage(e?: React.KeyboardEvent<HTMLElement>) {
+		if (!query) {
+			return
+		}
+	
+		if (e?.key === 'Enter') {
+			window.location.href=`/products/name/1/${query}`
+		}
+	}
+
+	function handlePageOnClick() {
+		if (!query) {
+			return
+		}	
+		window.location.href=`/products/name/1/${query}`
+	}
+
 	const {
 		FetchData, 
 		popularFemProducts, 
@@ -29,18 +49,36 @@ export function Home() {
 				/>
 				<S.SearchContainer>
 					<S.Category>
-						<S.Items>Camisas</S.Items>
-						<S.Items>Calças</S.Items>
-						<S.Items>Conjuntos</S.Items>
-						<S.Items>Vestidos</S.Items>
-						<S.Items>Kids</S.Items>
-						<S.Items className='all-products'>Ver tudo</S.Items>
+						<Link to='/products/name/1/camisa'>
+							<S.Items>Camisa</S.Items>
+						</Link>
+						<Link to='/products/name/1/calça'>
+							<S.Items>Calça</S.Items>
+						</Link>
+						<Link to='/products/name/1/conjunto'>
+							<S.Items>Conjunto</S.Items>
+						</Link>
+						<Link to='/products/name/1/vestido'>
+							<S.Items>Vestido</S.Items>
+						</Link>
+						<Link to='/products/name/1/moletom'>
+							<S.Items>Moletom</S.Items>
+						</Link>
+						<Link to='/products/1'>
+							<S.Items className='all-products'>Ver tudo</S.Items>
+						</Link>
+						<FaFilter/>
 					</S.Category>
 					<S.Search>
 						<input
 							placeholder='Buscar produto'
+							value={query}
+							onChange={(e) => setQuery(e.target.value)}
+							onKeyDown={handlePage}
 						/>
-						<IoSearchOutline/>
+						<IoSearchOutline
+							onClick={handlePageOnClick}
+						/>
 					</S.Search>
 					
 				</S.SearchContainer>

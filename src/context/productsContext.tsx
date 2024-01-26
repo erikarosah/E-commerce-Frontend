@@ -1,7 +1,7 @@
 import { useContext, useState, createContext } from 'react'
 import { instanceAxios } from '../helper/instanceAxios'
 
-interface ProductProps {
+export interface ProductProps {
 	available: string,
 	category: boolean,
 	id: string,
@@ -34,9 +34,9 @@ export function ProductsContextProvider({children}: ChildrenProps){
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get('/products/1/fem').then((data) => setPopularFemProducts(data.data[0]))
-			instanceAxios.get('/products/1/masc').then((data) => setPopularMascProducts(data.data[0]))
-			instanceAxios.get('/products/1/kids').then((data) => setPopularKidsProducts(data.data[0]))
+			instanceAxios.get('/products/category/1/fem').then((data) => setPopularFemProducts(data.data[0]))
+			instanceAxios.get('/products/category/1/masc').then((data) => setPopularMascProducts(data.data[0]))
+			instanceAxios.get('/products/category/1/kids').then((data) => setPopularKidsProducts(data.data[0]))
 			
 		} catch (error) {
 			console.log(error)

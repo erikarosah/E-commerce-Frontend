@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
 
     a{
         text-decoration: none;
+        color: #434343;
     }
 
     h2 {

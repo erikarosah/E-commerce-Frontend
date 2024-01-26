@@ -15,9 +15,15 @@ export function Header(){
 				<Link to='/'>
 					<S.Items>Shop</S.Items>
 				</Link>
-				<S.Items>Feminino</S.Items>
-				<S.Items>Masculino</S.Items>
-				<S.Items>Infantil</S.Items>
+				<Link to='/products/category/1/fem'>
+					<S.Items>Feminino</S.Items>
+				</Link>
+				<Link to='/products/category/1/masc'>
+					<S.Items>Masculino</S.Items>
+				</Link>
+				<Link to='/products/category/1/kids'>
+					<S.Items>Infantil</S.Items>
+				</Link>
 			</S.Section>
 
 			<div>

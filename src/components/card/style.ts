@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.main`
-    max-height: 40rem;
+    width: 23rem;
+    max-height: 35rem;
     cursor: pointer;
     margin-bottom: 2rem;
     transition: transform .2s ease-in-out;
