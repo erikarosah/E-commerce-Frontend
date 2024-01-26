@@ -50,4 +50,27 @@ export const GlobalStyle = createGlobalStyle`
     .all-products {
         font-weight: bold;
     }
+ 
+    .c-loader {
+        border: 6px solid #e5e5e5;
+        border-top-color: #2B2C2D;
+        height: 50px;
+        width: 50px;
+    }
+
+    .c-loader {
+        animation: is-rotating 1s infinite;
+        border: 6px solid #e5e5e5;
+        border-radius: 50%;
+        border-top-color: #2B2C2D;
+        height: 50px;
+        width: 50px;
+    }
+
+    @keyframes is-rotating {
+        to {
+            transform: rotate(1turn);
+        }
+    }
+
 `

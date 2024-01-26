@@ -19,7 +19,8 @@ interface ChildrenProps {
 interface ContextProps {
     popularFemProducts: Array<ProductProps>,
     popularMascProducts: Array<ProductProps>,
-    popularKidsProducts: Array<ProductProps>
+    popularKidsProducts: Array<ProductProps>,
+	loading: boolean,
     FetchData: () => void;
 }
 
@@ -29,6 +30,8 @@ export function ProductsContextProvider({children}: ChildrenProps){
 	const [ popularFemProducts, setPopularFemProducts ] = useState<ProductProps[]>([])
 	const [ popularMascProducts, setPopularMascProducts ] = useState<ProductProps[]>([])
 	const [ popularKidsProducts, setPopularKidsProducts ] = useState<ProductProps[]>([])
+	const [ loading, setLoading ] = useState(true)
+	
 
 	async function FetchData() {
 		const controller = new AbortController()
@@ -37,7 +40,7 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			instanceAxios.get('/products/category/1/fem').then((data) => setPopularFemProducts(data.data[0]))
 			instanceAxios.get('/products/category/1/masc').then((data) => setPopularMascProducts(data.data[0]))
 			instanceAxios.get('/products/category/1/kids').then((data) => setPopularKidsProducts(data.data[0]))
-			
+			setLoading(false)
 		} catch (error) {
 			console.log(error)
 			controller.abort()
@@ -49,7 +52,8 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			popularFemProducts, 
 			popularMascProducts, 
 			popularKidsProducts,
-			FetchData
+			FetchData,
+			loading
 		}}>
 			{children}
 		</ProductsContext.Provider>

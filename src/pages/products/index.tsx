@@ -4,6 +4,7 @@ import * as S from './style'
 import { useEffect } from 'react'
 import { Card } from '../../components/card'
 import { useProductsPageContext } from '../../context/productsPageContext'
+import { LoadingCard } from '../../components/loadingCard'
 
 export function Products() {
 	const params = useParams()
@@ -11,6 +12,7 @@ export function Products() {
 		data,
 		title,
 		filter, 
+		loading,
 		setFilter,
 		FetchData,
 		SearchByFilter
@@ -24,6 +26,11 @@ export function Products() {
 		SearchByFilter(params)
 	},[filter])
 
+	if(loading) {
+		return(
+			<LoadingCard/>
+		)
+	}
 	return (
 		<>
 			<Header/>

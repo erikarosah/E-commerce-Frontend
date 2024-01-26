@@ -11,9 +11,11 @@ interface ContextProps {
     data: Array<ProductProps>,
     title: string,
     filter: string,
+	loading: boolean,
     FetchData: (params: Readonly<Params<string>>) => void,
     SearchByFilter: (params: Readonly<Params<string>>) => void,
-    setFilter:(value: string) => void
+    setFilter: (value: string) => void,
+	setLoading: (value: boolean) => void
 }
 
 const ProductsPageContext = createContext<ContextProps>({} as ContextProps)
@@ -22,6 +24,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 	const [ data, setData ] = useState<ProductProps[]>([])
 	const [ title, setTitle ] = useState('')
 	const [ filter, setFilter ] = useState('')
+	const [ loading, setLoading ] = useState(true)
 
 	async function FetchData(params: Readonly<Params<string>>) {
 		const controller = new AbortController()
@@ -30,6 +33,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 			if(params.query) {
 				instanceAxios.get(`/products/name/${params.page}/${params.query}`).then((data) => setData(data.data[0]))
 				setTitle(params.query.toUpperCase())
+				setLoading(false)
 				return
 			}
 
@@ -46,11 +50,12 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 					setTitle('Infantil')
 					break
 				}
-
+				setLoading(false)
 				return
 			}
 
 			instanceAxios.get(`/products/${params.page}`).then((data) => setData(data.data[0].products))
+			setLoading(false)
 
 		} catch (error) {
 			console.log(error)
@@ -64,6 +69,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 		try {
 			if(filter != '') {
 				instanceAxios.get(`/products/category-filter/type/${params.page}/${params.query}/${filter}`).then((data) => setData(data.data[0]))
+				setLoading(false)
 			}
 		} catch (error) {
 			console.log(error)
@@ -76,9 +82,11 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 			title,
 			data,
 			filter,
+			loading,
 			FetchData,
 			SearchByFilter,
-			setFilter
+			setFilter,
+			setLoading
 		}}>
 			{children}
 		</ProductsPageContext.Provider>

@@ -9,6 +9,7 @@ import { Footer } from '../../components/footer'
 import { IoSearchOutline } from 'react-icons/io5'
 import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { LoadingCard } from '../../components/loadingCard'
 
 export function Home() {
 	const [ query, setQuery ] = useState('')
@@ -33,12 +34,20 @@ export function Home() {
 	const {
 		FetchData, 
 		popularFemProducts, 
-		popularKidsProducts
+		popularKidsProducts,
+		loading
 	} =  useProductsContext()
 
 	useEffect(() => {
 		FetchData()
 	},[])
+
+	if(loading) {
+		return(
+			<LoadingCard/>
+		)
+	}
+
 	return (
 		<>
 			<Header/>
