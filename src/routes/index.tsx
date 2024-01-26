@@ -6,10 +6,11 @@ export function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/"  element={<Home/>}/> 
+				<Route path="/" element={<Home/>}/> 
 				<Route path="/products/:page" element={<Products/>}/> 
 				<Route path="/products/name/:page/:query" element={<Products/>}/> 
 				<Route path="/products/category/:page/:category" element={<Products/>}/> 
+				<Route path="/products/category/type/:page/:category-filter/:query" element={<Products/>}/> 
 			</Routes>
 		</BrowserRouter>
 	)

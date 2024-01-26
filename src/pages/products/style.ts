@@ -19,3 +19,21 @@ export const Content = styled.div`
     gap: 1rem;
     margin-top: 4rem;
 `
+
+export const Filter = styled.div`
+    max-width: 100vw;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    padding-left: 2rem;
+
+    > ul {
+        display: flex;
+        margin-left: 2rem;
+        gap: 2rem;
+
+        > li {
+            cursor: pointer;
+        }
+    }
+`
