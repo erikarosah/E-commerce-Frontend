@@ -27,6 +27,10 @@ export const GlobalStyle = createGlobalStyle`
         transition: 0.2s;
     }
 
+    button {
+        border: none;
+    }
+
     a{
         text-decoration: none;
         color: #434343;
@@ -43,14 +47,19 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .old_price {
-        color: #C4C4C4;
+        color: #A2A2A2;
         text-decoration: line-through;
     }
 
     .all-products {
         font-weight: bold;
     }
- 
+    
+    .active{
+        background-color: #2B2C2D;
+        color: #E0E0E0;
+    }
+
     .c-loader {
         border: 6px solid #e5e5e5;
         border-top-color: #2B2C2D;

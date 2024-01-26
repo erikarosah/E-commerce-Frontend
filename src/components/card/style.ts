@@ -6,11 +6,11 @@ export const Container = styled.main`
     cursor: pointer;
     margin-bottom: 2rem;
     transition: transform .2s ease-in-out;
-  
+
     &:hover {
         transform: scale(1.01);
     }
-
+    
     > img {
         max-width: 23rem;
         min-width: 23rem;

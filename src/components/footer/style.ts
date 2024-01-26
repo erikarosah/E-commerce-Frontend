@@ -1,27 +1,27 @@
 import styled from 'styled-components'
 
 export const Container = styled.footer`
-    margin-top: 10vh;
-    height: 30vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #2B2C2D;
+  margin-top: 10vh;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #2B2C2D;
 
-    > p {
-        align-self: center;
-        color: #FFFFFF;
-        
-        > a svg {
-            font-size: 1.5rem;
-            margin-left: 1rem;
-            cursor: pointer;
-            transition: color .5s;
-            color: #FFFFFF;
+  > p {
+      align-self: center;
+      color: #FFFFFF;
+      
+      > a svg {
+          font-size: 1.5rem;
+          margin-left: 1rem;
+          cursor: pointer;
+          transition: color .5s;
+          color: #FFFFFF;
 
-            &:hover {
-                color: purple;
-            }
-        }
+          &:hover {
+              color: purple;
+          }
+      }
     }
 `
 

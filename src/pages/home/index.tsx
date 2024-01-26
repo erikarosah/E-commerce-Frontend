@@ -99,6 +99,7 @@ export function Home() {
 						popularFemProducts.slice(1, 5).map((item, index) => (
 							<Card
 								key={index}
+								id={item.id}
 								name={item.name}
 								img={item.image}
 								price={item.price}
@@ -119,6 +120,7 @@ export function Home() {
 						popularKidsProducts.slice(0, 8).map((item, index) => (
 							<Card
 								key={index}
+								id={item.id}
 								name={item.name}
 								img={item.image}
 								price={item.price}

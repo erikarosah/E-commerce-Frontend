@@ -38,7 +38,6 @@ export const Section = styled.ul`
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
-
 `
 
 export const Items = styled.li`

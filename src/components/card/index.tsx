@@ -1,15 +1,20 @@
 import * as S from './style'
 
 interface SectionProps {
+	id: string,
     img: string,
     name: string,
 	price: number,
-	old_price?:number
+	old_price: number
 }
 
 export function Card(props: SectionProps) {
+	function handlePage(id: string) {
+		window.location.href=`/product/${id}`
+	}
+
 	return (
-		<S.Container>
+		<S.Container onClick={() => handlePage(props.id)}>
 			<img
 				src={props.img}
 				alt=''
@@ -24,7 +29,12 @@ export function Card(props: SectionProps) {
 						}).format(props.price)}
 					</span>
 					
-					<span className='old_price'>{props.old_price?? props.old_price}</span>
+					<span className='old_price'>
+						{new Intl.NumberFormat('pt-BR', {
+							style: 'currency',
+							currency: 'BRL'
+						}).format(props.old_price)}
+					</span>
 				</div>
 			</S.Content>
 		</S.Container>
