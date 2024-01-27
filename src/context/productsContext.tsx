@@ -7,7 +7,7 @@ export interface ProductProps {
 	id: string,
 	image: string,
 	name: string,
-	old_price: number,
+	old_price: number | string,
 	price: number,
 	sizes: string[]
 }

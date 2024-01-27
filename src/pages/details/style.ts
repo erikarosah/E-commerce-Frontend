@@ -79,10 +79,19 @@ export const Freight = styled.div`
             border-bottom: 1px solid #000;
         }
 
+        input[type=number]::-webkit-inner-spin-button { 
+            -webkit-appearance: none;
+        }
+        
+        input[type=number] { 
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
         > button {
             background-color: #2B2C2D;
             color: #E0E0E0;
-            padding: 1rem;
+            padding: .6rem;
         }
     }
 `

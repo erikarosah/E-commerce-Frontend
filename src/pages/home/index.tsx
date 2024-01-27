@@ -103,7 +103,7 @@ export function Home() {
 								name={item.name}
 								img={item.image}
 								price={item.price}
-								old_price={item.old_price}
+								old_price={item.old_price.toString().replace('.', ',')}
 							/>
 						))
 					} 
@@ -124,7 +124,7 @@ export function Home() {
 								name={item.name}
 								img={item.image}
 								price={item.price}
-								old_price={item.old_price}
+								old_price={item.old_price.toString().replace('.', ',')}
 							/>
 						))
 					} 

@@ -64,7 +64,7 @@ export function Products() {
 								img={item.image}
 								name={item.name}
 								price={item.price}
-								old_price={item.old_price}
+								old_price={item.old_price.toString().replace('.', ',')}
 							/>
 						))
 					} 

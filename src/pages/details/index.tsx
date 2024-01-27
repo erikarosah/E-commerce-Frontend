@@ -1,31 +1,27 @@
 import { useParams } from 'react-router-dom'
 import { Header } from '../../components/header'
 import * as S from './style'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Sizes } from '../../components/sizes'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { FaFacebook } from 'react-icons/fa6'
 import { FaPinterest } from 'react-icons/fa'
-import { instanceAxios } from '../../helper/instanceAxios'
-import { ProductProps } from '../../context/productsContext'
+import { useProductsPageDetailContext } from '../../context/productPageDetail'
 
 export function Details() {
 	const params = useParams()
-	const [ data, setData ] = useState<ProductProps>({} as ProductProps)
 
-	async function FetchData() {
-		const controller = new AbortController()
-	
-		try {
-			instanceAxios.get(`/product/${params.id}`).then((data) => setData(data.data[0]))
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
+	const {
+		FetchData,
+		handleFreight,
+		showValue,
+		freight,
+		data,
+		value
+	} =  useProductsPageDetailContext()
 
 	useEffect(() => {
-		FetchData()
+		FetchData(params)
 	},[params])
 	return (
 		<>
@@ -45,11 +41,12 @@ export function Details() {
 							}).format(data.price)}
 						</span>
 						<span className='old_price'>
-							{new Intl.NumberFormat('pt-BR', {
-								style: 'currency',
-								currency: 'BRL'
-							}).format(data.old_price)}
-						</span>
+							{
+								data.old_price?
+									data.old_price.toString().replace('.', ',')
+									: ''
+							}
+						</span> 
 					</S.Prices>
 					<S.Sizes>
 						<span>tamanhos</span>
@@ -78,8 +75,17 @@ export function Details() {
 						<div>
 							<input
 								placeholder='Digite seu CEP'
+								type='number'
+								onChange={(e) => handleFreight(e.target.value)}
 							/>
-							<button>OK</button>
+							{
+								freight? <button onClick={showValue}>
+									OK
+								</button>
+									: ''	
+							}
+
+							<span className={value? 'active-span' : 'disable-span'}>R$ 20,00</span>
 						</div>
 					</S.Freight>
 				</S.Content>

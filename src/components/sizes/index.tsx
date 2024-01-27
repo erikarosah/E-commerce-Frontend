@@ -10,7 +10,7 @@ export function Sizes(props: sizeProps) {
 
 	return (
 		<S.Container 
-			className={active? 'active' : ''}
+			className={active? 'active-button' : ''}
 			onClick={() => setActive(!active)}
 		>
 			{props.size}

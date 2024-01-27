@@ -55,9 +55,19 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: bold;
     }
     
-    .active{
+    .active-button{
         background-color: #2B2C2D;
         color: #E0E0E0;
+    }
+
+    .active-span{
+        visibility: visible;
+        font-weight: bold;
+        align-self: flex-end;
+    }
+
+    .disable-span{
+        visibility: hidden;
     }
 
     .c-loader {

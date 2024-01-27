@@ -5,7 +5,7 @@ interface SectionProps {
     img: string,
     name: string,
 	price: number,
-	old_price: number
+	old_price: string
 }
 
 export function Card(props: SectionProps) {
@@ -30,10 +30,7 @@ export function Card(props: SectionProps) {
 					</span>
 					
 					<span className='old_price'>
-						{new Intl.NumberFormat('pt-BR', {
-							style: 'currency',
-							currency: 'BRL'
-						}).format(props.old_price)}
+						{props.old_price.toString().replace('.', ',')}
 					</span>
 				</div>
 			</S.Content>
