@@ -15,7 +15,25 @@ export const Container = styled.header`
 
     > div {
         display: flex;
+        align-items: center;
         gap: 2rem;
+        color: #2B2C2D;
+        font-weight: bold;
+
+        > h3 {
+            font-size: 1.4rem;
+
+            > span {
+                cursor: pointer;
+                transition: color .2s;
+                
+                &:hover {
+                    color: #EF1018;
+                }
+            }
+        }
+
+       
     }
 `
 

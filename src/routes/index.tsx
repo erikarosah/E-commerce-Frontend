@@ -2,12 +2,14 @@ import { BrowserRouter, Routes, Route  } from 'react-router-dom'
 import { Home } from '../pages/home'
 import { Products } from '../pages/products'
 import { Details } from '../pages/details'
+import { Session } from '../pages/session'
 
 export function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Home/>}/> 
+				<Route path="/session" element={<Session/>}/> 
 				<Route path="/product/:id" element={<Details/>}/> 
 				<Route path="/products/:page" element={<Products/>}/> 
 				<Route path="/products/name/:page/:query" element={<Products/>}/> 

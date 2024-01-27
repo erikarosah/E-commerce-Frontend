@@ -3,6 +3,11 @@ import CartImage from '../../assets/cart.png'
 import { Link } from 'react-router-dom'
 
 export function Header(){
+	function handleLogout() {
+		localStorage.removeItem('user')
+		localStorage.removeItem('token')
+		window.location.href='/'
+	}
 	return (
 		<S.Container>
 			<Link to='/'>
@@ -27,10 +32,19 @@ export function Header(){
 			</S.Section>
 
 			<div>
-				<S.ButtonLogin>
-                    Login
-				</S.ButtonLogin>
-
+				{
+					localStorage.getItem('user') ?
+						<h3>
+							Olá, {localStorage.getItem('user')?.split(' ')[0]} | <span onClick={handleLogout}>Sair</span>
+						</h3>
+						:
+						<Link to='/session'>
+							<S.ButtonLogin>
+								Login
+							</S.ButtonLogin>
+						</Link>
+				}
+				
 				<S.Cart
 					src={CartImage}
 					alt='shopping cart'

@@ -52,10 +52,12 @@ export function Home() {
 		<>
 			<Header/>
 			<S.Container>
-				<S.Banner
-					src={BannerImage1}
-					alt='banner'
-				/>
+				<Link to='/products/category/1/kids'>
+					<S.Banner
+						src={BannerImage1}
+						alt='banner'
+					/>
+				</Link>
 				<S.SearchContainer>
 					<S.Category>
 						<Link to='/products/name/1/camisa'>
@@ -108,10 +110,12 @@ export function Home() {
 						))
 					} 
 				</S.Content>
-				<S.BannerPromotion
-					src={BannerImage2}
-					alt=''
-				/>
+				<Link to='/products/category/type/1/fem/jeans'>
+					<S.BannerPromotion
+						src={BannerImage2}
+						alt=''
+					/>
+				</Link>
 				<S.Title>	
 					Novas coleções
 				</S.Title>
