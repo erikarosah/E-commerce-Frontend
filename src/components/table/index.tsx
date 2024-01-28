@@ -13,7 +13,12 @@ export function Table() {
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get('/products/1').then((data) => setData(data.data[0].products))
+			instanceAxios.get('/products/1')
+				.then((data) => setData(data.data[0].products))
+				.catch(() => {
+					alert('Ocorreu um erro, por favor tente novamente mais tarde')
+					window.location.href='/'
+				})
 			setLoading(false)
 		} catch (error) {
 			console.log(error)
@@ -25,7 +30,12 @@ export function Table() {
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.delete(`/products/${id}`).then()
+			instanceAxios.delete(`/products/${id}`)
+				.then()
+				.catch(() => {
+					alert('Ocorreu um erro, por favor tente novamente mais tarde')
+					window.location.href='/'
+				})
 			setLoading(false)
 			window.location.href='/manager/all'
 		} catch (error) {

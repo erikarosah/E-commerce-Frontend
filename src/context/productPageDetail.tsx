@@ -27,7 +27,12 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get(`/product/${params.id}`).then((data) => setData(data.data[0]))
+			instanceAxios.get(`/product/${params.id}`)
+				.then((data) => setData(data.data[0]))
+				.catch(() => {
+					alert('Ocorreu um erro, por favor tente novamente mais tarde')
+					window.location.href='/'
+				})
 
 		} catch (error) {
 			console.log(error)

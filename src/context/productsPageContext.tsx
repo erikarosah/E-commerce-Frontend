@@ -31,14 +31,24 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 		
 		try {
 			if(params.query) {
-				instanceAxios.get(`/products/name/${params.page}/${params.query}`).then((data) => setData(data.data[0]))
+				instanceAxios.get(`/products/name/${params.page}/${params.query}`)
+					.then((data) => setData(data.data[0]))
+					.catch(() => {
+						alert('Ocorreu um erro, por favor tente novamente mais tarde')
+						window.location.href='/'
+					})
 				setTitle(params.query.toUpperCase())
 				setLoading(false)
 				return
 			}
 
 			if(params.category) {
-				instanceAxios.get(`/products/category/${params.page}/${params.category}`).then((data) => setData(data.data[0]))
+				instanceAxios.get(`/products/category/${params.page}/${params.category}`)
+					.then((data) => setData(data.data[0]))
+					.catch(() => {
+						alert('Ocorreu um erro, por favor tente novamente mais tarde')
+						window.location.href='/'
+					})
 				switch(params.category) {
 				case 'fem': 
 					setTitle('Feminino')
@@ -54,7 +64,12 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 				return
 			}
 
-			instanceAxios.get(`/products/${params.page}`).then((data) => setData(data.data[0].products))
+			instanceAxios.get(`/products/${params.page}`)
+				.then((data) => setData(data.data[0].products))
+				.catch(() => {
+					alert('Ocorreu um erro, por favor tente novamente mais tarde')
+					window.location.href='/'
+				})
 			setLoading(false)
 
 		} catch (error) {
@@ -68,7 +83,12 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 
 		try {
 			if(filter != '') {
-				instanceAxios.get(`/products/category-filter/type/${params.page}/${params.query}/${filter}`).then((data) => setData(data.data[0]))
+				instanceAxios.get(`/products/category-filter/type/${params.page}/${params.query}/${filter}`)
+					.then((data) => setData(data.data[0]))
+					.catch(() => {
+						alert('Ocorreu um erro, por favor tente novamente mais tarde')
+						window.location.href='/'
+					})
 				setLoading(false)
 			}
 		} catch (error) {

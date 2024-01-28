@@ -11,7 +11,12 @@ export function UnavailableProduct() {
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get('/products/unavailables').then((data) => setData(data.data[0].products))
+			instanceAxios.get('/products/unavailables')
+				.then((data) => setData(data.data[0].products))
+				.catch(() => {
+					alert('Ocorreu um erro, por favor tente novamente mais tarde')
+					window.location.href='/'
+				})
 			setLoading(false)
 		} catch (error) {
 			console.log(error)

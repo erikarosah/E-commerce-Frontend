@@ -24,6 +24,10 @@ export function RegisterProduct() {
 				sizes: [sizes.toUpperCase()],
 				available: 'true'
 			}).then()
+				.catch(() => {
+					alert('Ocorreu um erro, por favor tente novamente mais tarde')
+					window.location.href='/'
+				})
 			
 			window.location.href='/manager/all'
 		} catch (error) {
