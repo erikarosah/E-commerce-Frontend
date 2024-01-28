@@ -45,6 +45,7 @@ export const Search = styled.div`
     justify-content: space-between;
 
    > input {
+        width: 100%;
         border: none;  
         font-weight: bold;
         color: #434343;

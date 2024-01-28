@@ -27,12 +27,10 @@ export const Content = styled.form`
         letter-spacing: 2px;
     }
 
-    > input {
-        width: 80%;
-        padding: 1.5rem 1rem;
-        border-radius: 5px;
-        border: none;
-        border: 1px solid #2B2C2D;
+    > h3 {
+        padding-left: 5.5rem;
+        align-self: flex-start;
+        color: red;
     }
 
     > span {

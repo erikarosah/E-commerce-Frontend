@@ -1,11 +1,13 @@
 import * as S from './style'
 import CartImage from '../../assets/cart.png'
 import { Link } from 'react-router-dom'
+import { FaGear } from 'react-icons/fa6'
 
 export function Header(){
 	function handleLogout() {
 		localStorage.removeItem('user')
 		localStorage.removeItem('token')
+		localStorage.removeItem('role')
 		window.location.href='/'
 	}
 	return (
@@ -44,11 +46,17 @@ export function Header(){
 							</S.ButtonLogin>
 						</Link>
 				}
-				
-				<S.Cart
-					src={CartImage}
-					alt='shopping cart'
-				/>
+				{
+					localStorage.getItem('role') === 'ADMIN'?
+						<Link to='manager/all'>
+							<FaGear/>
+						</Link>
+						: 
+						<S.Cart
+							src={CartImage}
+							alt='shopping cart'
+						/>
+				}
 			</div>
 		</S.Container>
 	)

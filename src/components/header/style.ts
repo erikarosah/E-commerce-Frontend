@@ -33,7 +33,10 @@ export const Container = styled.header`
             }
         }
 
-       
+        > a svg {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
     }
 `
 

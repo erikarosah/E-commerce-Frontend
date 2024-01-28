@@ -24,6 +24,7 @@ instanceAxios.interceptors.response.use(
 
 			if (error.response?.status === 404) {
 				console.log(error.response.status)
+				location.reload()
 				throw new Error('Client error')
 			}
 

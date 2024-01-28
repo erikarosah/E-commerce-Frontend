@@ -3,6 +3,10 @@ import { Home } from '../pages/home'
 import { Products } from '../pages/products'
 import { Details } from '../pages/details'
 import { Session } from '../pages/session'
+import { Manager } from '../pages/manager'
+import { Table } from '../components/table'
+import { RegisterProduct } from '../components/registerProduct'
+import { UnavailableProduct } from '../components/unavailableProduct'
 
 export function AppRoutes() {
 	return (
@@ -10,6 +14,20 @@ export function AppRoutes() {
 			<Routes>
 				<Route path="/" element={<Home/>}/> 
 				<Route path="/session" element={<Session/>}/> 
+				<Route path="/manager" element={<Manager/>}>
+					<Route
+						path="all"
+						element={<Table />}
+					/>
+					<Route
+						path="register"
+						element={<RegisterProduct/>}
+					/>
+					<Route
+						path="unavailable"
+						element={<UnavailableProduct/>}
+					/>
+				</Route> 
 				<Route path="/product/:id" element={<Details/>}/> 
 				<Route path="/products/:page" element={<Products/>}/> 
 				<Route path="/products/name/:page/:query" element={<Products/>}/> 

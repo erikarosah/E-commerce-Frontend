@@ -92,4 +92,52 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
 
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 2rem 1rem;
+        text-align: center;
+        font-size: 1.4rem;
+        
+        > img {
+            width: 40px;
+            height: auto;
+        }
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .remove-product {
+        > svg {
+            cursor: pointer;
+
+            &:hover {
+                fill: red;
+            }
+        }
+    }
+
+    .input-normal,
+    .input-erro {
+        width: 80%;
+        padding: 1.5rem 1rem;
+        border-radius: 5px;
+        border: none;
+        border: 1px solid #2B2C2D;
+    }
+
+    .input-normal{
+        border: 1px solid #2B2C2D;
+    }
+
+    .input-erro {
+        border: 2px solid red;
+    }
 `
