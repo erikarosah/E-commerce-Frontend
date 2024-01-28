@@ -13,11 +13,23 @@ export function UnavailableProduct() {
 		try {
 			instanceAxios.get('/products/unavailables')
 				.then((data) => setData(data.data[0].products))
-				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
-				})
+				.catch((erro) => console.log(erro))
 			setLoading(false)
+		} catch (error) {
+			console.log(error)
+			controller.abort()
+		}
+	}
+
+	function RemoveProduct(id: string) {
+		const controller = new AbortController()
+	
+		try {
+			instanceAxios.delete(`/products/${id}`)
+				.then()
+				.catch()
+			setLoading(false)
+			window.location.href='/manager/all'
 		} catch (error) {
 			console.log(error)
 			controller.abort()
@@ -32,41 +44,57 @@ export function UnavailableProduct() {
 		return <LoadingCard/>
 	}
 	return(
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th>ID</th>
-					<th>Nome</th>
-					<th>Tamanhos</th>
-					<th>Disponível</th>
-				</tr>
-			</thead>
-			<tbody>
-				{
-					data.map((item) => (
-						<>
-							<tr
-								key={item.id}
-							>
-								<td>
-									<img
-										src={item.image}
-										alt=''
-									/>
-								</td>
-								<td>{item.id}</td>
-								<td>{item.name}</td>
-								<td>{item.sizes.join(',')}</td>
-								<td className='remove-product'>
-									<IoClose/>
-								</td>
+		<>
+		
+			{
+				data.length === 0 ?
+					<h3>Não há produtos sem estoque</h3>
+					:
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Tamanhos</th>
+								<th>Disponível</th>
+								<th>Remover</th>
 							</tr>
-						</>
-					))
-				}
-			</tbody>
-		</table>
+						</thead>
+						<tbody>
+							{
+								data.map((item) => (
+									<>
+										<tr
+											key={item.id}
+										>
+											<td>
+												<img
+													src={item.image}
+													alt=''
+												/>
+											</td>
+											<td>{item.id}</td>
+											<td>{item.name}</td>
+											<td>{item.sizes.join(',')}</td>
+											<td>
+												<IoClose/>
+											</td>
+											<td 
+												className='remove-product'
+												onClick={() => RemoveProduct(item.id)}
+											>
+												<IoClose/>
+											</td>
+										</tr>
+									</>
+								))
+							}
+						</tbody>
+					</table>
+			}
+		
+		</>
 
 	)
 }

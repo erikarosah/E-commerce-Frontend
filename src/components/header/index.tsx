@@ -48,7 +48,7 @@ export function Header(){
 				}
 				{
 					localStorage.getItem('role') === 'ADMIN'?
-						<Link to='manager/all'>
+						<Link to='/manager/all'>
 							<FaGear/>
 						</Link>
 						: 

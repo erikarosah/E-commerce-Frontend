@@ -140,4 +140,12 @@ export const GlobalStyle = createGlobalStyle`
     .input-erro {
         border: 2px solid red;
     }
+
+    .message-erro {
+        color: red;
+    }
+
+    .btn-right {
+        margin-left: 95%;
+    }
 `

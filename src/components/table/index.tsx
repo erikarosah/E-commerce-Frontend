@@ -4,16 +4,25 @@ import { IoClose } from 'react-icons/io5'
 import { ProductProps } from '../../context/productsContext'
 import { instanceAxios } from '../../helper/instanceAxios'
 import { LoadingCard } from '../loadingCard'
+import { FaChevronRight } from 'react-icons/fa'
+import { FaChevronLeft } from 'react-icons/fa'
+
+import * as S from './style'
 
 export function Table() {
 	const [ data, setData ] = useState<ProductProps[]>([])
 	const [ loading, setLoading ] = useState(true)
+	const [ page, setPage ] = useState(1)
 
 	function FetchAllProducts() {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		})
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get('/products/1')
+			instanceAxios.get(`/products/${page}`)
 				.then((data) => setData(data.data[0].products))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -46,56 +55,84 @@ export function Table() {
 
 	useEffect(() => {
 		FetchAllProducts()
-	},[])
+	},[page])
 
 	if(loading) {
 		return <LoadingCard/>
 	}
 	return (
-	
-		<table>
-			<thead>
-				<tr>
-					<th></th>
-					<th>ID</th>
-					<th>Nome</th>
-					<th>Tamanhos</th>
-					<th>Disponível</th>
-					<th>Remover</th>
-				</tr>
-			</thead>
-			<tbody>
+		<>
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Tamanhos</th>
+						<th>Disponível</th>
+						<th>Remover</th>
+					</tr>
+				</thead>
+				<tbody>
 				
+					{
+						data.map((item) => (
+							<>
+								<tr key={item.id} >
+									<td>
+										<img
+											src={item.image}
+											alt=''
+										/>
+									</td>
+									<td>{item.id}</td>
+									<td>{item.name}</td>
+									<td>{item.sizes.join(',')}</td>
+									<td>{String(item.available) === 'true' ?
+										<IoCheckmarkSharp/>
+										:
+										<IoClose/>
+									}
+									</td>
+									<td 
+										className='remove-product'
+										onClick={() => RemoveProduct(item.id)}
+									>
+										<IoClose/>
+									</td>
+								</tr>
+							</>
+						))
+					}
+				</tbody>
+			</table>
+	
+			<S.Buttons>
 				{
-					data.map((item) => (
+					page === 1 ?
+						<button 
+							onClick={() => setPage(prevState => prevState + 1)}
+							className='btn-right'
+						>
+							<FaChevronRight/>
+						</button>
+						:
 						<>
-							<tr key={item.id} >
-								<td>
-									<img
-										src={item.image}
-										alt=''
-									/>
-								</td>
-								<td>{item.id}</td>
-								<td>{item.name}</td>
-								<td>{item.sizes.join(',')}</td>
-								<td>{String(item.available) === 'true' ?
-									<IoCheckmarkSharp/>
-									:
-									<IoClose/>
-								}
-								</td>
-								<td 
-									className='remove-product'
-									onClick={() => RemoveProduct(item.id)}
-								>
-									<IoClose/>
-								</td>
-							</tr>
+							<button onClick={() => setPage(prevState => prevState - 1)}>
+								<FaChevronLeft/>
+							</button>
+							{
+								data.length <= 10 ? '' :
+									<button 
+										onClick={() => setPage(prevState => prevState + 1)}
+										className='btn-right'
+									>
+										<FaChevronRight/>
+									</button>
+							}
 						</>
-					))
 				}
-			</tbody>
-		</table>
+			</S.Buttons>
+		</>
 	)
 }

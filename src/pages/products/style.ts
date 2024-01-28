@@ -37,3 +37,22 @@ export const Filter = styled.div`
         }
     }
 `
+
+export const Buttons = styled.div`
+    width: 100%;
+    padding: 2rem 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+
+    > button {
+        padding: 1rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        cursor: pointer;
+    }
+
+`

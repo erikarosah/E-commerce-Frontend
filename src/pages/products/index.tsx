@@ -5,22 +5,27 @@ import { useEffect } from 'react'
 import { Card } from '../../components/card'
 import { useProductsPageContext } from '../../context/productsPageContext'
 import { LoadingCard } from '../../components/loadingCard'
+import { FaChevronRight } from 'react-icons/fa'
+import { FaChevronLeft } from 'react-icons/fa'
 
 export function Products() {
 	const params = useParams()
+
 	const { 
 		data,
 		title,
 		filter, 
 		loading,
+		page,
 		setFilter,
 		FetchData,
-		SearchByFilter
+		SearchByFilter,
+		setPage
 	} = useProductsPageContext()
 	
 	useEffect(() => {
 		FetchData(params)
-	},[params])
+	},[page, params])
 
 	useEffect(() => {
 		SearchByFilter(params)
@@ -69,6 +74,41 @@ export function Products() {
 						))
 					} 
 				</S.Content>
+				<S.Buttons>
+					{
+						data.length <= 10?
+							''
+							:
+							<>
+								{
+									page === 1? 
+										<button 
+											onClick={() => setPage(page + 1)}
+											className='btn-right'
+										>
+											<FaChevronRight/>
+										</button>
+										:
+										<>
+
+											<button
+												onClick={() => setPage(page - 1)}
+											>
+												<FaChevronLeft/>
+											</button>
+
+											<button 
+												onClick={() => setPage(page + 1)}
+												className='btn-right'
+											>
+												<FaChevronRight/>
+											</button>
+										</>
+
+								}
+							</>
+					}
+				</S.Buttons>
 			</S.Container>
 		</>
 	)

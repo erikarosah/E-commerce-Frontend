@@ -9,8 +9,16 @@ export function RegisterProduct() {
 	const [ price, setPrice] = useState('')
 	const [ old_price, setOld_price] = useState('')
 	const [ sizes, setSizes] = useState('')
+	const [ erro, setErro] = useState('')
 
 	function HandleProduct(e: any) {
+		if(name === '' || image === '' || category === '' ||
+		price === '' || old_price === '' || sizes === '') {
+			e.preventDefault()
+			setErro('Preencha todos os campos')
+			return
+		}
+
 		e.preventDefault()
 		const controller = new AbortController()
 	
@@ -38,6 +46,12 @@ export function RegisterProduct() {
 
 	return(
 		<S.Form>
+			{
+				erro? 
+					<h3 className='message-erro'>Por favor, preencha todos os dados</h3>
+					: 
+					<h3>Insira as informações do produto</h3>
+			}
 			<input 
 				placeholder='Nome'
 				onChange={(e) => setName(e.target.value)}

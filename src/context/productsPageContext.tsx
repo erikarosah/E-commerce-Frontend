@@ -12,10 +12,12 @@ interface ContextProps {
     title: string,
     filter: string,
 	loading: boolean,
+	page: number,
     FetchData: (params: Readonly<Params<string>>) => void,
     SearchByFilter: (params: Readonly<Params<string>>) => void,
     setFilter: (value: string) => void,
-	setLoading: (value: boolean) => void
+	setLoading: (value: boolean) => void,
+	setPage: (value: number ) => void
 }
 
 const ProductsPageContext = createContext<ContextProps>({} as ContextProps)
@@ -25,13 +27,19 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 	const [ title, setTitle ] = useState('')
 	const [ filter, setFilter ] = useState('')
 	const [ loading, setLoading ] = useState(true)
+	const [ page, setPage ] = useState(1)
 
+	
 	async function FetchData(params: Readonly<Params<string>>) {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		})
 		const controller = new AbortController()
-		
+
 		try {
 			if(params.query) {
-				instanceAxios.get(`/products/name/${params.page}/${params.query}`)
+				instanceAxios.get(`/products/name/${page}/${params.query}`)
 					.then((data) => setData(data.data[0]))
 					.catch(() => {
 						alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -43,7 +51,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 			}
 
 			if(params.category) {
-				instanceAxios.get(`/products/category/${params.page}/${params.category}`)
+				instanceAxios.get(`/products/category/${page}/${params.category}`)
 					.then((data) => setData(data.data[0]))
 					.catch(() => {
 						alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -64,7 +72,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 				return
 			}
 
-			instanceAxios.get(`/products/${params.page}`)
+			instanceAxios.get(`/products/${page}`)
 				.then((data) => setData(data.data[0].products))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -79,11 +87,16 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 	}
 
 	function SearchByFilter(params: Readonly<Params<string>>){
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		})
+
 		const controller = new AbortController()
 
 		try {
 			if(filter != '') {
-				instanceAxios.get(`/products/category-filter/type/${params.page}/${params.query}/${filter}`)
+				instanceAxios.get(`/products/category-filter/type/${page}/${params.query}/${filter}`)
 					.then((data) => setData(data.data[0]))
 					.catch(() => {
 						alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -103,6 +116,8 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 			data,
 			filter,
 			loading,
+			page,
+			setPage,
 			FetchData,
 			SearchByFilter,
 			setFilter,

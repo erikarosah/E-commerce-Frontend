@@ -34,7 +34,7 @@ export function Session() {
 					</h2>
 					{
 						erro? 
-							<h3>
+							<h3 className='message-erro'>
 								{erro}
 							</h3> 
 							: ''

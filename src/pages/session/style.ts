@@ -30,7 +30,6 @@ export const Content = styled.form`
     > h3 {
         padding-left: 5.5rem;
         align-self: flex-start;
-        color: red;
     }
 
     > span {

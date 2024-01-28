@@ -4,10 +4,15 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
 
+    > h3 {
+        padding: 2rem 0;
+    }
+
     > input {
         width: 50%;
         padding: 1.5rem 1rem;
         border: none;
+        border-radius: 0;
         border-bottom: 1px solid #2B2C2D;
         margin-bottom: 2rem;
     }
