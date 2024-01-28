@@ -2,90 +2,23 @@ import { Header } from '../../components/header'
 import * as S from './style'
 import { PiBagSimpleFill } from 'react-icons/pi'
 import { FaUser } from 'react-icons/fa6'
-import { useState } from 'react'
-import { instanceAxios } from '../../helper/instanceAxios'
+import { useSessionContext } from '../../context/sessionContext'
 
 export function Session() {
-	const [ login, setLogin ] = useState(true)
-	const [ name, setName ] = useState('')
-	const [ email, setEmail ] = useState('')
-	const [ password, setPassword ] = useState('')
-	const [ role, setRole ] = useState('')
-	const [ erro, setErro ] = useState('')
+	const {
+		login, 
+		erro,
+		email,
+		name,
+		password,
+		handleInputs,
+		handleRegister,
+		handleLogin,
+		setName,
+		setEmail,
+		setPassword
+	} = useSessionContext()
 
-	function handleRegister(e: any, typeRole: string){
-		if(name === '' || email === '' || password === ''){
-			e.preventDefault()
-			setEmail('')
-			setPassword('')
-			setName('')
-			setErro('Insira todos os dados')
-			return
-		}
-
-		e.preventDefault()
-		setRole(typeRole)
-		
-		const controller = new AbortController()
-	
-		try {
-			instanceAxios.post('/users', {
-				name,
-				email,
-				password,
-				role
-			}).then(() => {
-				setPassword('')
-				setLogin(true)
-			}).catch (() => {
-				setErro('Este email já esta sendo utilizado')
-				setEmail('')
-				setPassword('')
-				setName('')
-			})
-
-		} catch(error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
-
-	function handleLogin(e: any) {
-		e.preventDefault()
-		
-		const controller = new AbortController()
-
-		try {
-			instanceAxios.post('/users/session', {
-				email,
-				password
-			}).then((data) => {
-				localStorage.setItem('token', data.data.token)
-				localStorage.setItem('user', data.data.user)
-				localStorage.setItem('role', data.data.role)
-				window.location.href='/'
-				setLogin(true)
-
-			}).catch(() => {
-				setErro('Email e/ou senha inválidos')
-				setEmail('')
-				setPassword('')
-				setName('')
-			})
-
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
-
-	function handleInputs() {
-		setLogin(!login)
-		setErro('')
-		setEmail('')
-		setPassword('')
-		setName('')
-	}
 	return (
 		<>
 			<Header/>

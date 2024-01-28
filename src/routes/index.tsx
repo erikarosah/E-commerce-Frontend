@@ -3,10 +3,10 @@ import { Home } from '../pages/home'
 import { Products } from '../pages/products'
 import { Details } from '../pages/details'
 import { Session } from '../pages/session'
-import { Manager } from '../pages/manager'
 import { Table } from '../components/table'
 import { RegisterProduct } from '../components/registerProduct'
 import { UnavailableProduct } from '../components/unavailableProduct'
+import { Manager } from '../pages/manager'
 
 export function AppRoutes() {
 	return (
