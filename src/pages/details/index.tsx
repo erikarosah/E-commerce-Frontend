@@ -10,15 +10,21 @@ import { useProductsPageDetailContext } from '../../context/productPageDetail'
 
 export function Details() {
 	const params = useParams()
-
+	
 	const {
 		FetchData,
-		handleFreight,
-		showValue,
+		HandleFreight,
+		ShowValue,
 		freight,
 		data,
 		value
 	} =  useProductsPageDetailContext()
+
+	function AddToCart() {
+		if(!localStorage.getItem('user')) {
+			window.location.href='/session'
+		}
+	}
 
 	useEffect(() => {
 		FetchData(params)
@@ -42,9 +48,7 @@ export function Details() {
 						</span>
 						<span className='old_price'>
 							{
-								data.old_price?
-									data.old_price.toString().replace('.', ',')
-									: ''
+								data.old_price ? data.old_price.toFixed(2).toString().replace('.', ',') : ''
 							}
 						</span> 
 					</S.Prices>
@@ -56,12 +60,12 @@ export function Details() {
 									<Sizes
 										key={index}
 										size={item}
-									/>
-								)) : ''
+									/> 
+								)) : '' 
 							}
 						</div>
 					</S.Sizes>
-					<S.Button>
+					<S.Button onClick={AddToCart}>
 						Adicionar ao carrinho
 					</S.Button>
 					<h3>Vendido e entregue por lojas <span>Be You</span></h3>
@@ -76,10 +80,10 @@ export function Details() {
 							<input
 								placeholder='Digite seu CEP'
 								type='number'
-								onChange={(e) => handleFreight(e.target.value)}
+								onChange={(e) => HandleFreight(e.target.value)}
 							/>
 							{
-								freight? <button onClick={showValue}>
+								freight? <button onClick={ShowValue}>
 									OK
 								</button>
 									: ''	

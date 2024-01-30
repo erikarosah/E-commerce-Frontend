@@ -14,7 +14,7 @@ import { LoadingCard } from '../../components/loadingCard'
 export function Home() {
 	const [ query, setQuery ] = useState('')
 
-	function handlePage(e?: React.KeyboardEvent<HTMLElement>) {
+	function HandlePage(e?: React.KeyboardEvent<HTMLElement>) {
 		if (!query) {
 			return
 		}
@@ -24,7 +24,7 @@ export function Home() {
 		}
 	}
 
-	function handlePageOnClick() {
+	function HandlePageOnClick() {
 		if (!query) {
 			return
 		}	
@@ -66,16 +66,10 @@ export function Home() {
 						<Link to='/products/name/1/calça'>
 							<S.Items>Calça</S.Items>
 						</Link>
-						<Link to='/products/name/1/conjunto'>
-							<S.Items>Conjunto</S.Items>
-						</Link>
-						<Link to='/products/name/1/vestido'>
-							<S.Items>Vestido</S.Items>
-						</Link>
 						<Link to='/products/name/1/moletom'>
 							<S.Items>Moletom</S.Items>
 						</Link>
-						<Link to='/products/1'>
+						<Link to='/products'>
 							<S.Items className='all-products'>Ver tudo</S.Items>
 						</Link>
 						<FaFilter/>
@@ -85,13 +79,12 @@ export function Home() {
 							placeholder='Buscar produto'
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
-							onKeyDown={handlePage}
+							onKeyDown={HandlePage}
 						/>
 						<IoSearchOutline
-							onClick={handlePageOnClick}
+							onClick={HandlePageOnClick}
 						/>
 					</S.Search>
-					
 				</S.SearchContainer>
 				<S.Title>	
 					Popular em Feminino
@@ -105,7 +98,7 @@ export function Home() {
 								name={item.name}
 								img={item.image}
 								price={item.price}
-								old_price={item.old_price.toString().replace('.', ',')}
+								old_price={item.old_price}
 							/>
 						))
 					} 
@@ -128,7 +121,7 @@ export function Home() {
 								name={item.name}
 								img={item.image}
 								price={item.price}
-								old_price={item.old_price.toString().replace('.', ',')}
+								old_price={item.old_price}
 							/>
 						))
 					} 

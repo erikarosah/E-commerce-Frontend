@@ -35,7 +35,7 @@ export function Products() {
 		return(
 			<LoadingCard/>
 		)
-	}
+	}	
 	return (
 		<>
 			<Header/>
@@ -62,51 +62,53 @@ export function Products() {
 		
 				<S.Content>	
 					{
-						data.map((item) => (
+						data.slice((page - 1) * 10, page * 10).map((item) => (
 							<Card
 								key={item.id}
 								id={item.id}
 								img={item.image}
 								name={item.name}
 								price={item.price}
-								old_price={item.old_price.toString().replace('.', ',')}
+								old_price={item.old_price}
 							/>
 						))
 					} 
 				</S.Content>
 				<S.Buttons>
 					{
-						data.length <= 10?
-							''
+						
+						page === 1?
+							<button 
+								onClick={() => setPage(page + 1)}
+								className='btn-right'
+							>
+								<FaChevronRight/>
+							</button>
 							:
 							<>
 								{
-									page === 1? 
-										<button 
-											onClick={() => setPage(page + 1)}
-											className='btn-right'
-										>
-											<FaChevronRight/>
-										</button>
-										:
+								
+									data.length > page * 10 ?
 										<>
-
-											<button
-												onClick={() => setPage(page - 1)}
-											>
-												<FaChevronLeft/>
+											<button onClick={() => setPage(page - 1)}>
+												<FaChevronLeft />
 											</button>
-
-											<button 
+											<button
 												onClick={() => setPage(page + 1)}
 												className='btn-right'
 											>
-												<FaChevronRight/>
+												<FaChevronRight />
 											</button>
 										</>
+										: 
+
+										<button onClick={() => setPage(page - 1)}>
+											<FaChevronLeft/>
+										</button>
 
 								}
 							</>
+						
 					}
 				</S.Buttons>
 			</S.Container>

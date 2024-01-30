@@ -8,7 +8,7 @@ export function Header(){
 		localStorage.removeItem('user')
 		localStorage.removeItem('token')
 		localStorage.removeItem('role')
-		window.location.href='/'
+		location.reload()
 	}
 	return (
 		<S.Container>

@@ -11,7 +11,7 @@ export function Manager() {
 					<ul>
 						<Link to='/manager/all'>
 							<li>
-									Todos os produtos
+								Todos os produtos
 							</li>
 						</Link>
 						<Link to='/manager/unavailable'>

@@ -6,6 +6,7 @@ import { instanceAxios } from '../../helper/instanceAxios'
 import { LoadingCard } from '../loadingCard'
 import { FaChevronRight } from 'react-icons/fa'
 import { FaChevronLeft } from 'react-icons/fa'
+import { FaPencilAlt } from 'react-icons/fa'
 
 import * as S from './style'
 
@@ -22,8 +23,8 @@ export function Table() {
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get(`/products/${page}`)
-				.then((data) => setData(data.data[0].products))
+			instanceAxios.get('/products')
+				.then((data) => setData(data.data[0]))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
 					window.location.href='/'
@@ -58,7 +59,9 @@ export function Table() {
 	},[page])
 
 	if(loading) {
-		return <LoadingCard/>
+		return (
+			<LoadingCard/>
+		)
 	}
 	return (
 		<>
@@ -66,17 +69,17 @@ export function Table() {
 				<thead>
 					<tr>
 						<th></th>
-						<th>ID</th>
 						<th>Nome</th>
 						<th>Tamanhos</th>
 						<th>Disponível</th>
 						<th>Remover</th>
+						<th>Editar</th>
 					</tr>
 				</thead>
 				<tbody>
 				
 					{
-						data.map((item) => (
+						data.slice((page - 1) * 10, page * 10).map((item) => (
 							<>
 								<tr key={item.id} >
 									<td>
@@ -85,7 +88,6 @@ export function Table() {
 											alt=''
 										/>
 									</td>
-									<td>{item.id}</td>
 									<td>{item.name}</td>
 									<td>{item.sizes.join(',')}</td>
 									<td>{String(item.available) === 'true' ?
@@ -100,6 +102,9 @@ export function Table() {
 									>
 										<IoClose/>
 									</td>
+									<td onClick={() => window.location.href=`/manager/update/${item.id}`}>
+										<FaPencilAlt/>
+									</td>
 								</tr>
 							</>
 						))
@@ -108,29 +113,41 @@ export function Table() {
 			</table>
 	
 			<S.Buttons>
+	
 				{
+						
 					page === 1 ?
 						<button 
-							onClick={() => setPage(prevState => prevState + 1)}
+							onClick={() => setPage(page + 1)}
 							className='btn-right'
 						>
 							<FaChevronRight/>
 						</button>
 						:
 						<>
-							<button onClick={() => setPage(prevState => prevState - 1)}>
-								<FaChevronLeft/>
-							</button>
 							{
-								data.length <= 10 ? '' :
-									<button 
-										onClick={() => setPage(prevState => prevState + 1)}
-										className='btn-right'
-									>
-										<FaChevronRight/>
+								
+								data.length > page * 10 ?
+									<>
+										<button onClick={() => setPage(page - 1)}>
+											<FaChevronLeft />
+										</button>
+										<button
+											onClick={() => setPage(page + 1)}
+											className='btn-right'
+										>
+											<FaChevronRight />
+										</button>
+									</>
+									: 
+
+									<button onClick={() => setPage(page - 1)}>
+										<FaChevronLeft/>
 									</button>
+
 							}
 						</>
+						
 				}
 			</S.Buttons>
 		</>

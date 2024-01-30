@@ -5,7 +5,7 @@ interface SectionProps {
     img: string,
     name: string,
 	price: number,
-	old_price: string
+	old_price: number
 }
 
 export function Card(props: SectionProps) {
@@ -30,7 +30,7 @@ export function Card(props: SectionProps) {
 					</span>
 					
 					<span className='old_price'>
-						{props.old_price.toString().replace('.', ',')}
+						{props.old_price.toFixed(2).toString().replace('.', ',')}
 					</span>
 				</div>
 			</S.Content>

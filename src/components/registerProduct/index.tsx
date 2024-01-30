@@ -23,13 +23,14 @@ export function RegisterProduct() {
 		const controller = new AbortController()
 	
 		try {
+		
 			instanceAxios.post('/products', {
 				name: name,
 				image: image,
 				category: category,
 				price: price.replace(',','.'),
 				old_price: old_price.replace(',','.'),
-				sizes: [sizes.toUpperCase()],
+				sizes: sizes.toUpperCase().split(','),
 				available: 'true'
 			}).then()
 				.catch(() => {
@@ -37,7 +38,7 @@ export function RegisterProduct() {
 					window.location.href='/'
 				})
 			
-			window.location.href='/manager/all'
+			// window.location.href='/manager/all'
 		} catch (error) {
 			console.log(error)
 			controller.abort()

@@ -11,9 +11,9 @@ export function Session() {
 		email,
 		name,
 		password,
-		handleInputs,
-		handleRegister,
-		handleLogin,
+		HandleInputs,
+		HandleRegister,
+		HandleLogin,
 		setName,
 		setEmail,
 		setPassword
@@ -84,18 +84,18 @@ export function Session() {
 					
 					{
 						login?
-							<button onClick={(e) => handleLogin(e)}>
+							<button onClick={(e) => HandleLogin(e)}>
 								Entrar
 							</button>
 							:
 							<>
-								<h2>Entrar como</h2>
+								<h2>Criar conta como</h2>
 								<S.Buttons>
-									<button onClick={(e) => handleRegister(e, 'ADMIN')}>
+									<button onClick={(e) => HandleRegister(e, 'ADMIN')}>
 										Admin
 										<PiBagSimpleFill/>
 									</button>
-									<button onClick={(e) => handleRegister(e, 'USER')}>
+									<button onClick={(e) => HandleRegister(e, 'USER')}>
 										Cliente
 										<FaUser/>
 									</button>
@@ -103,12 +103,12 @@ export function Session() {
 							</>
 					}
 
-					<span onClick={handleInputs}>
+					<span onClick={HandleInputs}>
 						{
 							login?
-								'Não possui conta? Registrar-se'
+								'Não possui conta? Registre-se'
 								:
-								'Já possui conta? Fazer login'
+								'Já possui conta? Faça login'
 						}
 					</span>
 				</S.Content>

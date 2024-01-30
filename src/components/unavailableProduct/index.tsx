@@ -3,6 +3,8 @@ import { IoClose } from 'react-icons/io5'
 import { ProductProps } from '../../context/productsContext'
 import { useEffect, useState } from 'react'
 import { LoadingCard } from '../loadingCard'
+import { FaPencilAlt } from 'react-icons/fa'
+
 export function UnavailableProduct() {
 	const [ data, setData ] = useState<ProductProps[]>([])
 	const [ loading, setLoading ] = useState(true)
@@ -12,7 +14,7 @@ export function UnavailableProduct() {
 	
 		try {
 			instanceAxios.get('/products/unavailables')
-				.then((data) => setData(data.data[0].products))
+				.then((data) => setData(data.data[0]))
 				.catch((erro) => console.log(erro))
 			setLoading(false)
 		} catch (error) {
@@ -41,7 +43,9 @@ export function UnavailableProduct() {
 	},[])
 
 	if(loading) {
-		return <LoadingCard/>
+		return (
+			<LoadingCard/>
+		)
 	}
 	return(
 		<>
@@ -54,11 +58,11 @@ export function UnavailableProduct() {
 						<thead>
 							<tr>
 								<th></th>
-								<th>ID</th>
 								<th>Nome</th>
 								<th>Tamanhos</th>
 								<th>Disponível</th>
 								<th>Remover</th>
+								<th>Editar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,7 +78,6 @@ export function UnavailableProduct() {
 													alt=''
 												/>
 											</td>
-											<td>{item.id}</td>
 											<td>{item.name}</td>
 											<td>{item.sizes.join(',')}</td>
 											<td>
@@ -85,6 +88,9 @@ export function UnavailableProduct() {
 												onClick={() => RemoveProduct(item.id)}
 											>
 												<IoClose/>
+											</td>
+											<td onClick={() => window.location.href=`/manager/update/${item.id}`}>
+												<FaPencilAlt/>
 											</td>
 										</tr>
 									</>

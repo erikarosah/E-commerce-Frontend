@@ -7,7 +7,7 @@ export interface ProductProps {
 	id: string,
 	image: string,
 	name: string,
-	old_price: number | string,
+	old_price: number,
 	price: number,
 	sizes: string[]
 }
@@ -31,7 +31,6 @@ export function ProductsContextProvider({children}: ChildrenProps){
 	const [ popularMascProducts, setPopularMascProducts ] = useState<ProductProps[]>([])
 	const [ popularKidsProducts, setPopularKidsProducts ] = useState<ProductProps[]>([])
 	const [ loading, setLoading ] = useState(true)
-	
 
 	async function FetchData() {
 		const controller = new AbortController()
@@ -67,8 +66,8 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			popularFemProducts, 
 			popularMascProducts, 
 			popularKidsProducts,
-			FetchData,
-			loading
+			loading,
+			FetchData
 		}}>
 			{children}
 		</ProductsContext.Provider>

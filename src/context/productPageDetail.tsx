@@ -12,8 +12,8 @@ interface ContextProps {
 	freight: boolean,
 	value: boolean,
     FetchData: (params: Readonly<Params<string>>) => void,
-    handleFreight: (cep: string) => void,
-    showValue: () => void
+    HandleFreight: (cep: string) => void,
+    ShowValue: () => void
 }
 
 const ProductPageDetailContext = createContext<ContextProps>({} as ContextProps)
@@ -40,7 +40,7 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 		}
 	}
 
-	function handleFreight(cep: string) {
+	function HandleFreight(cep: string) {
 		setFreight(false)
 		setValue(false)
 
@@ -51,7 +51,7 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 		setFreight(true)
 	}
 
-	function showValue() {
+	function ShowValue() {
 		setValue(true)
 	}
 
@@ -61,8 +61,8 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 			freight,
 			value,
 			FetchData,
-			handleFreight,
-			showValue
+			HandleFreight,
+			ShowValue
 		}}>
 			{children}
 		</ProductPageDetailContext.Provider>

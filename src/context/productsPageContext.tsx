@@ -29,7 +29,6 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 	const [ loading, setLoading ] = useState(true)
 	const [ page, setPage ] = useState(1)
 
-	
 	async function FetchData(params: Readonly<Params<string>>) {
 		window.scrollTo({
 			top: 0,
@@ -72,8 +71,8 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 				return
 			}
 
-			instanceAxios.get(`/products/${page}`)
-				.then((data) => setData(data.data[0].products))
+			instanceAxios.get('/products')
+				.then((data) => setData(data.data[0]))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
 					window.location.href='/'

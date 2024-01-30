@@ -11,9 +11,9 @@ interface ContextProps {
     email: string,
     password: string,
     erro: string,
-    handleRegister: (e: any, typeRole: string) => void,
-    handleLogin: (e: any) => void,
-    handleInputs: () => void,
+    HandleRegister: (e: any, typeRole: string) => void,
+    HandleLogin: (e: any) => void,
+    HandleInputs: () => void,
 	setName:(name: string) => void,
 	setEmail:(email: string) => void,
 	setPassword:(password: string) => void,
@@ -29,7 +29,7 @@ export function SessionContextProvider({children}: ChildrenProps){
 	const [ role, setRole ] = useState('')
 	const [ erro, setErro ] = useState('')
 
-	function handleRegister(e: any, typeRole: string){
+	function HandleRegister(e: any, typeRole: string){
 		if(name === '' || email === '' || password === ''){
 			e.preventDefault()
 			setEmail('')
@@ -66,7 +66,7 @@ export function SessionContextProvider({children}: ChildrenProps){
 		}
 	}
 
-	function handleLogin(e: any) {
+	function HandleLogin(e: any) {
 		e.preventDefault()
 		
 		const controller = new AbortController()
@@ -79,7 +79,7 @@ export function SessionContextProvider({children}: ChildrenProps){
 				localStorage.setItem('token', data.data.token)
 				localStorage.setItem('user', data.data.user)
 				localStorage.setItem('role', data.data.role)
-				window.location.href='/'
+				history.back()
 				setLogin(true)
 
 			}).catch(() => {
@@ -95,7 +95,7 @@ export function SessionContextProvider({children}: ChildrenProps){
 		}
 	}
 
-	function handleInputs() {
+	function HandleInputs() {
 		setLogin(!login)
 		setErro('')
 		setEmail('')
@@ -110,9 +110,9 @@ export function SessionContextProvider({children}: ChildrenProps){
 			email,
 			password, 
 			erro,
-			handleRegister,
-			handleLogin,
-			handleInputs,
+			HandleRegister,
+			HandleLogin,
+			HandleInputs,
 			setEmail,
 			setName,
 			setPassword

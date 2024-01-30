@@ -7,6 +7,7 @@ import { Table } from '../components/table'
 import { RegisterProduct } from '../components/registerProduct'
 import { UnavailableProduct } from '../components/unavailableProduct'
 import { Manager } from '../pages/manager'
+import { UpdateProduct } from '../components/updateProduct'
 
 export function AppRoutes() {
 	return (
@@ -27,9 +28,13 @@ export function AppRoutes() {
 						path="unavailable"
 						element={<UnavailableProduct/>}
 					/>
+					<Route
+						path="update/:id"
+						element={<UpdateProduct/>}
+					/>
 				</Route> 
+				<Route path="/products" element={<Products/>}/> 
 				<Route path="/product/:id" element={<Details/>}/> 
-				<Route path="/products/:page" element={<Products/>}/> 
 				<Route path="/products/name/:page/:query" element={<Products/>}/> 
 				<Route path="/products/category/:page/:category" element={<Products/>}/> 
 				<Route path="/products/category/type/:page/:category-filter/:query" element={<Products/>}/> 
