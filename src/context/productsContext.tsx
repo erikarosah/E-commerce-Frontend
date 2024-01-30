@@ -36,19 +36,19 @@ export function ProductsContextProvider({children}: ChildrenProps){
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.get('/products/category/1/fem')
+			instanceAxios.get('/products/fem')
 				.then((data) => setPopularFemProducts(data.data[0]))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
 					window.location.href='/'
 				})
-			instanceAxios.get('/products/category/1/masc')
+			instanceAxios.get('/products/masc')
 				.then((data) => setPopularMascProducts(data.data[0]))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
 					window.location.href='/'
 				})
-			instanceAxios.get('/products/category/1/kids')
+			instanceAxios.get('/products/kids')
 				.then((data) => setPopularKidsProducts(data.data[0]))
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')

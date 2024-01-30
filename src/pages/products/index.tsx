@@ -14,52 +14,53 @@ export function Products() {
 	const { 
 		data,
 		title,
-		filter, 
 		loading,
 		page,
-		setFilter,
-		FetchData,
 		SearchByFilter,
-		setPage
+		setPage,
 	} = useProductsPageContext()
 	
 	useEffect(() => {
-		FetchData(params)
-	},[page, params])
-
-	useEffect(() => {
 		SearchByFilter(params)
-	},[filter])
+	},[params])
+
+	function HandleSearchByFilter(value: string){
+		window.location.href=`/products/${params.query}/${value}`
+		SearchByFilter(params)
+	}
 
 	if(loading) {
-		return(
-			<LoadingCard/>
-		)
+		return (<LoadingCard/>)
 	}	
 	return (
 		<>
 			<Header/>
 			<S.Container >
-				<h1>Confira seus resultados para: {title ? title : 'Todos os produtos'}</h1>
+				<h1>Confira seus resultados para: {title}</h1>
 				{
-					params.category ? '' :
-						<S.Filter>
-							<span>Filtrar por:</span>
-							<ul>
-								<li onClick={() => setFilter('fem')}>
+					params.category &&
+					!params.query ? '' :
+						<>
+							{
+								title != 'Todos os produtos' ?
+									<S.Filter>
+										<span>Filtrar por:</span>
+										<ul>
+											<li onClick={() => HandleSearchByFilter('fem')}>
 									Feminino
-								</li>
-								<li onClick={() => setFilter('masc')}>
+											</li>
+											<li onClick={() => HandleSearchByFilter('masc')}>
 									Masculino
-								</li>
-								<li onClick={() => setFilter('kids')}>
+											</li>
+											<li onClick={() => HandleSearchByFilter('kids')}>
 									Infantil
-								</li>
-							</ul>
-						</S.Filter>
-						
+											</li>
+										</ul>
+									</S.Filter>
+									: ''
+							}
+						</>
 				}
-		
 				<S.Content>	
 					{
 						data.slice((page - 1) * 10, page * 10).map((item) => (
@@ -72,43 +73,52 @@ export function Products() {
 								old_price={item.old_price}
 							/>
 						))
-					} 
+					}
 				</S.Content>
 				<S.Buttons>
 					{
 						
-						page === 1?
-							<button 
-								onClick={() => setPage(page + 1)}
-								className='btn-right'
-							>
-								<FaChevronRight/>
-							</button>
+						data.length <= 10 ?
+							''
 							:
 							<>
 								{
 								
-									data.length > page * 10 ?
-										<>
-											<button onClick={() => setPage(page - 1)}>
-												<FaChevronLeft />
-											</button>
-											<button
-												onClick={() => setPage(page + 1)}
-												className='btn-right'
-											>
-												<FaChevronRight />
-											</button>
-										</>
+									page === 1 && data.length > page * 10 ?
+										<button
+											onClick={() => setPage(page + 1)}
+											className='btn-right'
+										>
+											<FaChevronRight />
+										</button>
+									
 										: 
 
-										<button onClick={() => setPage(page - 1)}>
-											<FaChevronLeft/>
-										</button>
-
+										<>
+											{
+												data.length > page * 10 ?
+													<>
+														<button onClick={() => setPage(page - 1)}>
+															<FaChevronLeft />
+														</button>
+														<button
+															onClick={() => setPage(page + 1)}
+															className='btn-right'
+														>
+															<FaChevronRight />
+														</button>
+													</>
+													: 
+	
+													<button onClick={() => setPage(page - 1)}>
+														<FaChevronLeft/>
+													</button>
+	
+											}
+										</>
 								}
 							</>
-						
+
 					}
 				</S.Buttons>
 			</S.Container>

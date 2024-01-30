@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import { useProductsContext } from '../../context/productsContext'
 import { Footer } from '../../components/footer'
 import { IoSearchOutline } from 'react-icons/io5'
-import { FaFilter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { LoadingCard } from '../../components/loadingCard'
 
@@ -20,7 +19,7 @@ export function Home() {
 		}
 	
 		if (e?.key === 'Enter') {
-			window.location.href=`/products/name/1/${query}`
+			window.location.href=`/products/name/${query}`
 		}
 	}
 
@@ -28,7 +27,7 @@ export function Home() {
 		if (!query) {
 			return
 		}	
-		window.location.href=`/products/name/1/${query}`
+		window.location.href=`/products/name/${query}`
 	}
 
 	const {
@@ -60,19 +59,18 @@ export function Home() {
 				</Link>
 				<S.SearchContainer>
 					<S.Category>
-						<Link to='/products/name/1/camisa'>
+						<Link to='/products/name/camisa'>
 							<S.Items>Camisa</S.Items>
 						</Link>
-						<Link to='/products/name/1/calça'>
+						<Link to='/products/name/calça'>
 							<S.Items>Calça</S.Items>
 						</Link>
-						<Link to='/products/name/1/moletom'>
+						<Link to='/products/name/moletom'>
 							<S.Items>Moletom</S.Items>
 						</Link>
 						<Link to='/products'>
 							<S.Items className='all-products'>Ver tudo</S.Items>
 						</Link>
-						<FaFilter/>
 					</S.Category>
 					<S.Search>
 						<input

@@ -2,6 +2,7 @@ import * as S from './style'
 import CartImage from '../../assets/cart.png'
 import { Link } from 'react-router-dom'
 import { FaGear } from 'react-icons/fa6'
+import { useProductsPageContext } from '../../context/productsPageContext'
 
 export function Header(){
 	function handleLogout() {
@@ -10,6 +11,11 @@ export function Header(){
 		localStorage.removeItem('role')
 		location.reload()
 	}
+
+	const { 
+		setPage
+	} = useProductsPageContext()
+
 	return (
 		<S.Container>
 			<Link to='/'>
@@ -22,14 +28,23 @@ export function Header(){
 				<Link to='/'>
 					<S.Items>Shop</S.Items>
 				</Link>
-				<Link to='/products/category/1/fem'>
-					<S.Items>Feminino</S.Items>
+				<Link to='/products/fem'>
+					<S.Items
+						onClick={() => setPage(1)}
+					>Feminino
+					</S.Items>
 				</Link>
-				<Link to='/products/category/1/masc'>
-					<S.Items>Masculino</S.Items>
+				<Link to='/products/masc'>
+					<S.Items
+						onClick={() => setPage(1)}
+					>Masculino
+					</S.Items>
 				</Link>
-				<Link to='/products/category/1/kids'>
-					<S.Items>Infantil</S.Items>
+				<Link to='/products/kids'>
+					<S.Items
+						onClick={() => setPage(1)}
+					>Infantil
+					</S.Items>
 				</Link>
 			</S.Section>
 

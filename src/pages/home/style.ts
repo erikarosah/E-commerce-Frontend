@@ -13,7 +13,7 @@ export const SearchContainer = styled.div`
     width: 68%;
     margin-top: 10vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     align-self: center;
     padding: 0 0 1rem 0;
@@ -22,10 +22,11 @@ export const SearchContainer = styled.div`
 export const Category = styled.ul`
     width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: right;
+    gap: 1rem;
 `
 export const Items = styled.li`
+    margin-right: 1rem;
     font-size: 1.4rem;
     cursor: pointer;
     transition: filter .5s ease;
