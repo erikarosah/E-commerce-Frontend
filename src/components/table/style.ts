@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Buttons = styled.div`
     width: 100%;
-    padding: 2rem 0;
+    padding: 2rem;
     display: flex;
     justify-content: space-between;
 

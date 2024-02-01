@@ -6,11 +6,12 @@ import { Sizes } from '../../components/sizes'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { FaFacebook } from 'react-icons/fa6'
 import { FaPinterest } from 'react-icons/fa'
-import { useProductsPageDetailContext } from '../../context/productPageDetail'
+import { useProductsPageDetailContext } from '../../context/detailPageContext'
+import { useCartContext } from '../../context/cartContext'
 
 export function Details() {
 	const params = useParams()
-	
+
 	const {
 		FetchData,
 		HandleFreight,
@@ -20,15 +21,14 @@ export function Details() {
 		value
 	} =  useProductsPageDetailContext()
 
-	function AddToCart() {
-		if(!localStorage.getItem('user')) {
-			window.location.href='/session'
-		}
-	}
+	const {
+		AddToCart
+	} = useCartContext()
 
 	useEffect(() => {
 		FetchData(params)
 	},[params])
+
 	return (
 		<>
 			<Header/>
@@ -65,7 +65,9 @@ export function Details() {
 							}
 						</div>
 					</S.Sizes>
-					<S.Button onClick={AddToCart}>
+					<S.Button 
+						onClick={() => AddToCart(data)}
+					>
 						Adicionar ao carrinho
 					</S.Button>
 					<h3>Vendido e entregue por lojas <span>Be You</span></h3>

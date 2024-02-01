@@ -12,8 +12,15 @@ export function RegisterProduct() {
 	const [ erro, setErro] = useState('')
 
 	function HandleProduct(e: any) {
-		if(name === '' || image === '' || category === '' ||
-		price === '' || old_price === '' || sizes === '') {
+		if(
+			name === '' || 
+			sizes === ''||
+			image === '' || 
+			price === '' || 
+			category === '' ||
+			old_price === '' 
+		) {
+
 			e.preventDefault()
 			setErro('Preencha todos os campos')
 			return
@@ -30,7 +37,7 @@ export function RegisterProduct() {
 				category: category,
 				price: price.replace(',','.'),
 				old_price: old_price.replace(',','.'),
-				sizes: sizes.toUpperCase().split(','),
+				sizes: sizes.toUpperCase().replace( /[^a-zA-Z0-9]/g, '').split(''),
 				available: 'true'
 			}).then()
 				.catch(() => {
@@ -38,7 +45,7 @@ export function RegisterProduct() {
 					window.location.href='/'
 				})
 			
-			// window.location.href='/manager/all'
+			window.location.href='/manager/all'
 		} catch (error) {
 			console.log(error)
 			controller.abort()
@@ -66,15 +73,17 @@ export function RegisterProduct() {
 				onChange={(e) => setCategory(e.target.value)}
 			/>
 			<input
+				type='number'
 				placeholder='Preço atual'
 				onChange={(e) => setPrice(e.target.value)}
 			/>
 			<input
+				type='number'
 				placeholder='Preço antigo'
 				onChange={(e) => setOld_price(e.target.value)}
 			/>
 			<input
-				placeholder='Tamanhos (P, M, G , GG)'
+				placeholder='Tamanhos (P, M, G)'
 				onChange={(e) => setSizes(e.target.value)}
 			/>
 			<button onClick={(e) => HandleProduct(e)}>

@@ -4,7 +4,7 @@ import BannerImage1 from '../../assets/banner-1-dt.jpg'
 import BannerImage2 from '../../assets/banner-2-dt.jpg'
 import { Card } from '../../components/card'
 import { useEffect, useState } from 'react'
-import { useProductsContext } from '../../context/productsContext'
+import { useProductsContext } from '../../context/homePageContext'
 import { Footer } from '../../components/footer'
 import { IoSearchOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
@@ -51,7 +51,7 @@ export function Home() {
 		<>
 			<Header/>
 			<S.Container>
-				<Link to='/products/category/1/kids'>
+				<Link to='/products/kids'>
 					<S.Banner
 						src={BannerImage1}
 						alt='banner'
@@ -101,7 +101,7 @@ export function Home() {
 						))
 					} 
 				</S.Content>
-				<Link to='/products/category/type/1/fem/jeans'>
+				<Link to='/products/jeans/fem'>
 					<S.BannerPromotion
 						src={BannerImage2}
 						alt=''

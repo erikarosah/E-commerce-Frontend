@@ -8,6 +8,7 @@ import { RegisterProduct } from '../components/registerProduct'
 import { UnavailableProduct } from '../components/unavailableProduct'
 import { Manager } from '../pages/manager'
 import { UpdateProduct } from '../components/updateProduct'
+import { NotFound } from '../pages/notFound'
 
 export function AppRoutes() {
 	return (
@@ -38,6 +39,7 @@ export function AppRoutes() {
 				<Route path="/products/:query/:category" element={<Products/>}/> 
 				<Route path="/products/:category" element={<Products/>}/> 
 				<Route path="/product/:id" element={<Details/>}/> 
+				<Route path="/notfound" element={<NotFound/>}/> 
 			</Routes>
 		</BrowserRouter>
 	)

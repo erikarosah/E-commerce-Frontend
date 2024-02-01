@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { IoCheckmarkSharp } from 'react-icons/io5'
 import { IoClose } from 'react-icons/io5'
-import { ProductProps } from '../../context/productsContext'
+import { ProductProps } from '../../context/homePageContext'
 import { instanceAxios } from '../../helper/instanceAxios'
 import { LoadingCard } from '../loadingCard'
 import { FaChevronRight } from 'react-icons/fa'
@@ -40,7 +40,7 @@ export function Table() {
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.delete(`/products/${id}`)
+			instanceAxios.delete(`/product/${id}`)
 				.then()
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -102,7 +102,9 @@ export function Table() {
 									>
 										<IoClose/>
 									</td>
-									<td onClick={() => window.location.href=`/manager/update/${item.id}`}>
+									<td onClick={() => window.location.href=`/manager/update/${item.id}`}
+										className='icon'
+									>
 										<FaPencilAlt/>
 									</td>
 								</tr>
@@ -113,41 +115,49 @@ export function Table() {
 			</table>
 	
 			<S.Buttons>
-	
 				{
 						
-					page === 1 ?
-						<button 
-							onClick={() => setPage(page + 1)}
-							className='btn-right'
-						>
-							<FaChevronRight/>
-						</button>
+					data.length <= 10 ?
+						''
 						:
 						<>
 							{
 								
-								data.length > page * 10 ?
-									<>
-										<button onClick={() => setPage(page - 1)}>
-											<FaChevronLeft />
-										</button>
-										<button
-											onClick={() => setPage(page + 1)}
-											className='btn-right'
-										>
-											<FaChevronRight />
-										</button>
-									</>
+								page === 1 && data.length > page * 10 ?
+									<button
+										onClick={() => setPage(page + 1)}
+										className='btn-right'
+									>
+										<FaChevronRight />
+									</button>
+									
 									: 
 
-									<button onClick={() => setPage(page - 1)}>
-										<FaChevronLeft/>
-									</button>
-
+									<>
+										{
+											data.length > page * 10 ?
+												<>
+													<button onClick={() => setPage(page - 1)}>
+														<FaChevronLeft />
+													</button>
+													<button
+														onClick={() => setPage(page + 1)}
+														className='btn-right'
+													>
+														<FaChevronRight />
+													</button>
+												</>
+												: 
+	
+												<button onClick={() => setPage(page - 1)}>
+													<FaChevronLeft/>
+												</button>
+	
+										}
+									</>
 							}
 						</>
-						
+
 				}
 			</S.Buttons>
 		</>

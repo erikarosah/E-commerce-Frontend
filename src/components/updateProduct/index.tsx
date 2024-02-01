@@ -48,7 +48,6 @@ export function UpdateProduct() {
 		}
 		const controller = new AbortController()
 		e.preventDefault()
-	
 		try {
 			instanceAxios.put(`/product/${params.id}`, {
 				name,
@@ -57,7 +56,7 @@ export function UpdateProduct() {
 				price,
 				old_price,
 				available,
-				sizes: [sizes.toUpperCase()]
+				sizes: sizes.toUpperCase().replace( /[^a-zA-Z0-9]/g, '').split('')
 			})
 				.then(() => window.location.href='/manager/all')
 				.catch(() => {
@@ -65,7 +64,7 @@ export function UpdateProduct() {
 					window.location.href='/'
 				})
 			setLoading(false)
-		
+
 		} catch (error) {
 			console.log(error)
 			controller.abort()
@@ -101,15 +100,15 @@ export function UpdateProduct() {
 			<input
 				value={price}
 				placeholder='Preço atual'
-				onChange={(e) => setPrice(e.target.value)}
+				onChange={(e) => setPrice(e.target.value.replace(',','.'))}
 			/>
 			<input
 				value={old_price}
 				placeholder='Preço antigo'
-				onChange={(e) => setOld_price(e.target.value)}
+				onChange={(e) => setOld_price(e.target.value.replace(',','.'))}
 			/>
 			<input
-				placeholder='Tamanhos (P, M, G , GG)'
+				placeholder='Tamanhos (P, M, G)'
 				onChange={(e) => setSizes(e.target.value)}
 			/>
 			<h3>Disponível?</h3>

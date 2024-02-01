@@ -1,6 +1,6 @@
 import { useContext, useState, createContext } from 'react'
 import { instanceAxios } from '../helper/instanceAxios'
-import { ProductProps } from './productsContext'
+import { ProductProps } from './homePageContext'
 import { Params } from 'react-router-dom'
 
 interface ChildrenProps {
@@ -30,10 +30,6 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 
 	function SearchByFilter(params: Readonly<Params<string>>){
 		setLoading(true)
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth'
-		})
 		const controller = new AbortController()
 
 		if(params.category && params.query) {
@@ -70,6 +66,10 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 			try {
 				instanceAxios.get(`/products/name/${params.query}`)
 					.then((data) => {
+						if(String(data.data) === 'Resource not found') {
+							window.location.href='/notfound'
+							return
+						}
 						setData(data.data[0])
 						setLoading(false)
 					})
@@ -77,7 +77,6 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 						alert('Ocorreu um erro, por favor tente novamente mais tarde')
 						window.location.href='/'
 					})
-
 				setTitle(params.query.toUpperCase())
 			}catch (error) {
 				console.log(error)

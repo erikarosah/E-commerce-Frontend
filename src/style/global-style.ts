@@ -141,11 +141,41 @@ export const GlobalStyle = createGlobalStyle`
         border: 2px solid red;
     }
 
+    input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    }
+
+    input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    }
+    
     .message-erro {
         color: red;
     }
 
     .btn-right {
         margin-left: 95%;
+    }
+
+    .icon {
+        cursor: pointer;
+    }
+
+    .animated {
+        animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        20%, 40%, 60%, 80% {
+            transform: translateX(-3px);
+        }
+        30%, 50%, 70% {
+            transform: translateX(3px);
+        }
     }
 `

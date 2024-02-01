@@ -1,6 +1,6 @@
 import { instanceAxios } from '../../helper/instanceAxios'
 import { IoClose } from 'react-icons/io5'
-import { ProductProps } from '../../context/productsContext'
+import { ProductProps } from '../../context/homePageContext'
 import { useEffect, useState } from 'react'
 import { LoadingCard } from '../loadingCard'
 import { FaPencilAlt } from 'react-icons/fa'
@@ -27,7 +27,7 @@ export function UnavailableProduct() {
 		const controller = new AbortController()
 	
 		try {
-			instanceAxios.delete(`/products/${id}`)
+			instanceAxios.delete(`/product/${id}`)
 				.then()
 				.catch()
 			setLoading(false)
@@ -51,9 +51,7 @@ export function UnavailableProduct() {
 		<>
 		
 			{
-				data.length === 0 ?
-					<h3>Não há produtos sem estoque</h3>
-					:
+				Array.isArray(data) ?
 					<table>
 						<thead>
 							<tr>
@@ -89,7 +87,9 @@ export function UnavailableProduct() {
 											>
 												<IoClose/>
 											</td>
-											<td onClick={() => window.location.href=`/manager/update/${item.id}`}>
+											<td onClick={() => window.location.href=`/manager/update/${item.id}`}
+												className='icon'
+											>
 												<FaPencilAlt/>
 											</td>
 										</tr>
@@ -98,9 +98,9 @@ export function UnavailableProduct() {
 							}
 						</tbody>
 					</table>
+					:
+					<h3>Não há produtos sem estoque</h3>
 			}
-		
 		</>
-
 	)
 }

@@ -1,6 +1,6 @@
 import { useContext, useState, createContext } from 'react'
 import { instanceAxios } from '../helper/instanceAxios'
-import { ProductProps } from './productsContext'
+import { ProductProps } from './homePageContext'
 import { Params } from 'react-router-dom'
 
 interface ChildrenProps {

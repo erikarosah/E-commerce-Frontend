@@ -19,11 +19,18 @@ export function Products() {
 		SearchByFilter,
 		setPage,
 	} = useProductsPageContext()
-	
+
 	useEffect(() => {
 		SearchByFilter(params)
 	},[params])
 
+	useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		})
+	},[page])
+	
 	function HandleSearchByFilter(value: string){
 		window.location.href=`/products/${params.query}/${value}`
 		SearchByFilter(params)
