@@ -18,12 +18,12 @@ instanceAxios.interceptors.response.use(
 	function (error) {
 		if (error instanceof AxiosError) {
 			if (error.response?.status === 500) {
-				console.log(error.response.status)
+				console.log(error.response.data.message)
 				throw new Error('Server error')
 			}
 
 			if (error.response?.status === 404) {
-				console.log(error.response.status)
+				console.log(error.response.data.message)
 				location.reload()
 				throw new Error('Client error')
 			}

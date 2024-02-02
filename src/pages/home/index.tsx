@@ -4,7 +4,7 @@ import BannerImage1 from '../../assets/banner-1-dt.jpg'
 import BannerImage2 from '../../assets/banner-2-dt.jpg'
 import { Card } from '../../components/card'
 import { useEffect, useState } from 'react'
-import { useProductsContext } from '../../context/homePageContext'
+import { useProductsContext } from '../../context/productsContext'
 import { Footer } from '../../components/footer'
 import { IoSearchOutline } from 'react-icons/io5'
 import { Link } from 'react-router-dom'
@@ -12,6 +12,12 @@ import { LoadingCard } from '../../components/loadingCard'
 
 export function Home() {
 	const [ query, setQuery ] = useState('')
+	const {
+		loading,
+		popularFemProducts, 
+		popularKidsProducts,
+		FetchDataHomepage
+	} =  useProductsContext()
 
 	function HandlePage(e?: React.KeyboardEvent<HTMLElement>) {
 		if (!query) {
@@ -30,15 +36,8 @@ export function Home() {
 		window.location.href=`/products/name/${query}`
 	}
 
-	const {
-		FetchData, 
-		popularFemProducts, 
-		popularKidsProducts,
-		loading
-	} =  useProductsContext()
-
 	useEffect(() => {
-		FetchData()
+		FetchDataHomepage()
 	},[])
 
 	if(loading) {

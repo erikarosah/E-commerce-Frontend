@@ -7,16 +7,17 @@ interface ChildrenProps {
 
 interface ContextProps {
     login: boolean,
-    name: string,
+	name: string,
+    erro: string,
     email: string,
     password: string,
-    erro: string,
-    HandleRegister: (e: any, typeRole: string) => void,
-    HandleLogin: (e: any) => void,
     HandleInputs: () => void,
-	setName:(name: string) => void,
-	setEmail:(email: string) => void,
-	setPassword:(password: string) => void,
+    HandleLogin: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+	setName:(value: string) => void,
+	setEmail:(value: string) => void,
+	setPassword:(value: string) => void,
+	setErro:(value: string) => void,
+    HandleRegister: (e:  React.MouseEvent<HTMLButtonElement, MouseEvent>, typeRole: string) => void,
 }
 
 const SessionContext = createContext<ContextProps>({} as ContextProps)
@@ -25,20 +26,11 @@ export function SessionContextProvider({children}: ChildrenProps){
 	const [ login, setLogin ] = useState(true)
 	const [ name, setName ] = useState('')
 	const [ email, setEmail ] = useState('')
-	const [ password, setPassword ] = useState('')
 	const [ role, setRole ] = useState('')
 	const [ erro, setErro ] = useState('')
+	const [ password, setPassword ] = useState('')
 
-	function HandleRegister(e: any, typeRole: string){
-		if(name === '' || email === '' || password === ''){
-			e.preventDefault()
-			setEmail('')
-			setPassword('')
-			setName('')
-			setErro('Insira todos os dados')
-			return
-		}
-
+	function HandleRegister(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, typeRole: string){
 		e.preventDefault()
 		setRole(typeRole)
 		
@@ -54,7 +46,7 @@ export function SessionContextProvider({children}: ChildrenProps){
 				setPassword('')
 				setLogin(true)
 			}).catch (() => {
-				setErro('Este email já esta sendo utilizado')
+				setErro('Verifique seus dados novamente e utilize um e-mail disponível')
 				setEmail('')
 				setPassword('')
 				setName('')
@@ -66,7 +58,7 @@ export function SessionContextProvider({children}: ChildrenProps){
 		}
 	}
 
-	function HandleLogin(e: any) {
+	function HandleLogin(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		e.preventDefault()
 		
 		const controller = new AbortController()
@@ -115,7 +107,8 @@ export function SessionContextProvider({children}: ChildrenProps){
 			HandleInputs,
 			setEmail,
 			setName,
-			setPassword
+			setPassword,
+			setErro
 		}}>
 			{children}
 		</SessionContext.Provider>

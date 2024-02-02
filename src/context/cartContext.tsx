@@ -1,5 +1,5 @@
 import { useContext, useState, createContext } from 'react'
-import { ProductProps } from './homePageContext'
+import { ProductProps } from './productsContext'
 
 interface ChildrenProps {
     children: React.ReactNode;
@@ -7,18 +7,19 @@ interface ChildrenProps {
 
 interface CartContextProps {
     added: number,
+	total: number,
 	isAnimated: boolean,
 	openModal: boolean,
-	allProducts: ProductProps[],
 	products: string | null,
-	total: number,
+	allProducts: ProductProps[],
+	StartAnimation: () => void,
+	Sum: (value: number) => void,
     setAdded: (value: number) => void,
+	Subtraction: (value: number) => void,
+	RemoveToCart: (value: string) => void,
     setOpenModal: (value: boolean) => void,
     AddToCart: (data: ProductProps) => void,
-	StartAnimation: () => void,
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>,
-	Sum: (value: number) => void
-	Subtraction: (value: number) => void
 }
 
 const CartContext = createContext<CartContextProps>({} as CartContextProps)
@@ -88,6 +89,18 @@ export function CartContextProvider({children}: ChildrenProps){
 		StartAnimation()
 	} 
 
+	function RemoveToCart(id: string) {
+		if(products) {
+			const oldArray: ProductProps[] = JSON.parse(products) || []
+			const index = oldArray.findIndex((item) => item.id === id)
+			oldArray.splice(index, 1)
+
+			const updatedArray = [...oldArray]
+			localStorage.setItem('products', JSON.stringify(updatedArray))
+			setAllProducts(updatedArray)
+		}
+	}
+
 	function Sum(number: number) {
 		setTotal(prev => prev + number)
 	}
@@ -99,16 +112,17 @@ export function CartContextProvider({children}: ChildrenProps){
 	return(
 		<CartContext.Provider value={{  
 			added,
-			isAnimated,
-			allProducts,
 			total,
 			products,
 			openModal,
-			setOpenModal,
+			isAnimated,
+			allProducts,
 			Sum,
-			Subtraction,
 			setAdded,
 			AddToCart,
+			Subtraction,
+			RemoveToCart,
+			setOpenModal,
 			StartAnimation,
 			setAllProducts,
 		}}>

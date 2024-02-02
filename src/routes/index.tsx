@@ -16,6 +16,12 @@ export function AppRoutes() {
 			<Routes>
 				<Route path="/" element={<Home/>}/> 
 				<Route path="/session" element={<Session/>}/> 
+				<Route path="/products" element={<Products/>}/> 
+				<Route path="/products/name/:query" element={<Products/>}/> 
+				<Route path="/products/:query/:category" element={<Products/>}/> 
+				<Route path="/products/:category" element={<Products/>}/> 
+				<Route path="/product/:id" element={<Details/>}/> 
+				<Route path="/notfound" element={<NotFound/>}/> 
 				<Route path="/manager" element={<Manager/>}>
 					<Route
 						path="all"
@@ -34,12 +40,6 @@ export function AppRoutes() {
 						element={<UpdateProduct/>}
 					/>
 				</Route> 
-				<Route path="/products" element={<Products/>}/> 
-				<Route path="/products/name/:query" element={<Products/>}/> 
-				<Route path="/products/:query/:category" element={<Products/>}/> 
-				<Route path="/products/:category" element={<Products/>}/> 
-				<Route path="/product/:id" element={<Details/>}/> 
-				<Route path="/notfound" element={<NotFound/>}/> 
 			</Routes>
 		</BrowserRouter>
 	)

@@ -1,58 +1,23 @@
 import { useEffect, useState } from 'react'
 import { IoCheckmarkSharp } from 'react-icons/io5'
 import { IoClose } from 'react-icons/io5'
-import { ProductProps } from '../../context/homePageContext'
-import { instanceAxios } from '../../helper/instanceAxios'
 import { LoadingCard } from '../loadingCard'
 import { FaChevronRight } from 'react-icons/fa'
 import { FaChevronLeft } from 'react-icons/fa'
 import { FaPencilAlt } from 'react-icons/fa'
-
 import * as S from './style'
+import { useProductsContext } from '../../context/productsContext'
 
 export function Table() {
-	const [ data, setData ] = useState<ProductProps[]>([])
-	const [ loading, setLoading ] = useState(true)
 	const [ page, setPage ] = useState(1)
 
-	function FetchAllProducts() {
-		window.scrollTo({
-			top: 0,
-			behavior: 'smooth'
-		})
-		const controller = new AbortController()
+	const {
+		loading,
+		allProducts,
+		FetchAllProducts,
+		RemoveProduct
+	} = useProductsContext()
 	
-		try {
-			instanceAxios.get('/products')
-				.then((data) => setData(data.data[0]))
-				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
-				})
-			setLoading(false)
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
-
-	function RemoveProduct(id: string) {
-		const controller = new AbortController()
-	
-		try {
-			instanceAxios.delete(`/product/${id}`)
-				.then()
-				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
-				})
-			setLoading(false)
-			window.location.href='/manager/all'
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
 
 	useEffect(() => {
 		FetchAllProducts()
@@ -63,6 +28,7 @@ export function Table() {
 			<LoadingCard/>
 		)
 	}
+
 	return (
 		<>
 			<table>
@@ -79,7 +45,7 @@ export function Table() {
 				<tbody>
 				
 					{
-						data.slice((page - 1) * 10, page * 10).map((item) => (
+						allProducts.slice((page - 1) * 10, page * 10).map((item) => (
 							<>
 								<tr key={item.id} >
 									<td>
@@ -117,13 +83,13 @@ export function Table() {
 			<S.Buttons>
 				{
 						
-					data.length <= 10 ?
+					allProducts.length <= 10 ?
 						''
 						:
 						<>
 							{
 								
-								page === 1 && data.length > page * 10 ?
+								page === 1 && allProducts.length > page * 10 ?
 									<button
 										onClick={() => setPage(page + 1)}
 										className='btn-right'
@@ -135,7 +101,7 @@ export function Table() {
 
 									<>
 										{
-											data.length > page * 10 ?
+											allProducts.length > page * 10 ?
 												<>
 													<button onClick={() => setPage(page - 1)}>
 														<FaChevronLeft />

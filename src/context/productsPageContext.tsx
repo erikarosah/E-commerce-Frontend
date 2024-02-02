@@ -1,6 +1,6 @@
 import { useContext, useState, createContext } from 'react'
 import { instanceAxios } from '../helper/instanceAxios'
-import { ProductProps } from './homePageContext'
+import { ProductProps } from './productsContext'
 import { Params } from 'react-router-dom'
 
 interface ChildrenProps {
@@ -8,15 +8,15 @@ interface ChildrenProps {
 }  
 
 interface ContextProps {
-    data: Array<ProductProps>,
-    title: string,
-    filter: string,
-	loading: boolean,
 	page: number,
-    SearchByFilter: (params: Readonly<Params<string>>) => void,
+	title: string,
+	filter: string,
+	loading: boolean,
+    data: Array<ProductProps>,
+	setPage: (value: number ) => void
     setFilter: (value: string) => void,
 	setLoading: (value: boolean) => void,
-	setPage: (value: number ) => void
+    SearchByFilter: (params: Readonly<Params<string>>) => void,
 }
 
 const ProductsPageContext = createContext<ContextProps>({} as ContextProps)
@@ -131,15 +131,15 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 
 	return(
 		<ProductsPageContext.Provider value={{  
-			title,
 			data,
+			page,
+			title,
 			filter,
 			loading,
-			page,
 			setPage,
-			SearchByFilter,
 			setFilter,
-			setLoading
+			setLoading,
+			SearchByFilter
 		}}>
 			{children}
 		</ProductsPageContext.Provider>

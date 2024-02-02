@@ -1,6 +1,6 @@
-import { useContext, useState, createContext } from 'react'
+import { useContext, useState, createContext, ChangeEvent } from 'react'
 import { instanceAxios } from '../helper/instanceAxios'
-import { ProductProps } from './homePageContext'
+import { ProductProps } from './productsContext'
 import { Params } from 'react-router-dom'
 
 interface ChildrenProps {
@@ -8,12 +8,12 @@ interface ChildrenProps {
 }  
 
 interface ContextProps {
-    data:  ProductProps,
-	freight: boolean,
 	value: boolean,
-    FetchData: (params: Readonly<Params<string>>) => void,
-    HandleFreight: (cep: string) => void,
+	freight: boolean,
+    data: ProductProps,
     ShowValue: () => void
+    FetchData: (params: Readonly<Params<string>>) => void,
+    HandleFreight: (e: ChangeEvent<HTMLInputElement>, cep: string) => void,
 }
 
 const ProductPageDetailContext = createContext<ContextProps>({} as ContextProps)
@@ -40,7 +40,7 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 		}
 	}
 
-	function HandleFreight(cep: string) {
+	function HandleFreight(e: ChangeEvent<HTMLInputElement>, cep: string) {
 		setFreight(false)
 		setValue(false)
 
@@ -58,11 +58,11 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 	return(
 		<ProductPageDetailContext.Provider value={{  
 			data,
-			freight,
 			value,
+			freight,
 			FetchData,
-			HandleFreight,
-			ShowValue
+			ShowValue,
+			HandleFreight
 		}}>
 			{children}
 		</ProductPageDetailContext.Provider>

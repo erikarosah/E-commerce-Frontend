@@ -16,8 +16,39 @@ export function Session() {
 		HandleLogin,
 		setName,
 		setEmail,
-		setPassword
+		setPassword,
+		setErro,
 	} = useSessionContext()
+
+	function VerifyLogin(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		if(email === '' || password === ''){
+			e.preventDefault()
+			setEmail('')
+			setPassword('')
+			setName('')
+			setErro('Insira todos os dados')
+			return
+		}
+
+		HandleLogin(e)
+	}
+	
+	function VerifyRegister(
+		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+		role: string
+
+	) {
+		if(name === '' || email === '' || password === ''){
+			e.preventDefault()
+			setEmail('')
+			setPassword('')
+			setName('')
+			setErro('Insira todos os dados')
+			return
+		}
+
+		HandleRegister(e, role)
+	}
 
 	return (
 		<>
@@ -61,6 +92,7 @@ export function Session() {
 							<>
 								<input 
 									value={name}
+									autoComplete='username'
 									onChange={(e) => setName(e.target.value)}
 									placeholder='Nome'
 									className={erro? 'input-erro' : 'input-normal'}
@@ -75,8 +107,9 @@ export function Session() {
 								<input
 									value={password}
 									type='password'
+									autoComplete='current-password'
 									onChange={(e) => setPassword(e.target.value)}
-									placeholder='Senha'
+									placeholder='Senha (mínimo 6 dígitos)'
 									className={erro? 'input-erro' : 'input-normal'}
 								/>
 							</>
@@ -84,18 +117,18 @@ export function Session() {
 					
 					{
 						login?
-							<button onClick={(e) => HandleLogin(e)}>
+							<button onClick={(e) => VerifyLogin(e)}>
 								Entrar
 							</button>
 							:
 							<>
 								<h2>Criar conta como</h2>
 								<S.Buttons>
-									<button onClick={(e) => HandleRegister(e, 'ADMIN')}>
+									<button onClick={(e) => VerifyRegister(e, 'ADMIN')}>
 										Admin
 										<PiBagSimpleFill/>
 									</button>
-									<button onClick={(e) => HandleRegister(e, 'USER')}>
+									<button onClick={(e) => VerifyRegister(e, 'USER')}>
 										Cliente
 										<FaUser/>
 									</button>

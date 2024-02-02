@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.button`
+export const Container = styled.input`
     width: fit-content;
     padding: 1.5rem;
     margin-top: 2rem;

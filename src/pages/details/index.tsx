@@ -25,6 +25,12 @@ export function Details() {
 		AddToCart
 	} = useCartContext()
 
+	function HandleFreightEnter(e?: React.KeyboardEvent<HTMLElement>) {	
+		if (e?.key === 'Enter') {
+			ShowValue()
+		}
+	}
+
 	useEffect(() => {
 		FetchData(params)
 	},[params])
@@ -82,7 +88,9 @@ export function Details() {
 							<input
 								placeholder='Digite seu CEP'
 								type='number'
-								onChange={(e) => HandleFreight(e.target.value)}
+								onChange={(e) => HandleFreight(e, e.target.value)}
+								onKeyDown={HandleFreightEnter}
+
 							/>
 							{
 								freight? <button onClick={ShowValue}>

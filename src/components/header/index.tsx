@@ -12,6 +12,7 @@ export function Header(){
 		localStorage.removeItem('user')
 		localStorage.removeItem('token')
 		localStorage.removeItem('role')
+		localStorage.removeItem('products')
 		location.reload()
 	}
 
@@ -20,8 +21,8 @@ export function Header(){
 		allProducts,
 		products,
 		total,
-		setOpenModal,
 		openModal,
+		setOpenModal,
 		setAllProducts
 	} = useCartContext()
 	
@@ -35,6 +36,7 @@ export function Header(){
 			setAllProducts(data)
 		}
 	},[products])
+
 	return (
 		<S.Container>
 			<Link to='/'>

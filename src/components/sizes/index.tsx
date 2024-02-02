@@ -10,10 +10,10 @@ export function Sizes(props: sizeProps) {
 
 	return (
 		<S.Container 
+			value={props.size}
+			type='button'
 			className={active? 'active-button' : ''}
 			onClick={() => setActive(!active)}
-		>
-			{props.size}
-		</S.Container>
+		/>
 	)
 }

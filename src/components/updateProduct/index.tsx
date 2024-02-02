@@ -1,24 +1,55 @@
 import * as S from './style'
-import { instanceAxios } from '../../helper/instanceAxios'
 import { LoadingCard } from '../loadingCard'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Params, useParams } from 'react-router-dom'
+import { useProductsContext } from '../../context/productsContext'
+import { instanceAxios } from '../../helper/instanceAxios'
 
 export function UpdateProduct() {
 	const params = useParams()
-	const [ loading, setLoading ] = useState(true)
 	const [ name, setName ] = useState('')
 	const [ image, setImage ] = useState('')
 	const [ category, setCategory ] = useState('')
+	const [ available, setAvailable ] = useState('')
 	const [ price, setPrice] = useState('')
-	const [ old_price, setOld_price] = useState('')
+	const [ old_price, setOldPrice] = useState('')
 	const [ sizes, setSizes] = useState('')
-	const [ available, setAvailable] = useState('')
 	const [ erro, setErro] = useState('')
+	const [ loading, setLoading] = useState(true)
 
-	function GetProduct() {
+	const {
+		UpdateProduct
+	} = useProductsContext()
+
+	function Verify(e: React.MouseEvent<HTMLButtonElement, MouseEvent> ) {
+		if(name === '' || 
+			image === '' ||
+			category === '' ||
+			price === '' || 
+			old_price === '' || 
+			sizes === '' || 
+			available === ''
+		) {
+			e.preventDefault()
+			setErro('Preencha todos os campos')
+			return
+		}
+
+		UpdateProduct(
+			params,
+			name,
+			image,
+			category,
+			price,
+			old_price,
+			sizes,
+			available
+		)
+	}
+
+	function GetProduct(params: Readonly<Params<string>>) {
 		const controller = new AbortController()
-	
+   
 		try {
 			instanceAxios.get(`/product/${params.id}`)
 				.then((data) => {
@@ -26,7 +57,7 @@ export function UpdateProduct() {
 					setImage(data.data[0].image)
 					setCategory(data.data[0].category)
 					setPrice(data.data[0].price)
-					setOld_price(data.data[0].old_price)
+					setOldPrice(data.data[0].old_price)
 				}) 
 				.catch(() => {
 					alert('Ocorreu um erro, por favor tente novamente mais tarde')
@@ -39,40 +70,8 @@ export function UpdateProduct() {
 		}
 	}
 
-	function UpdateProduct(e : any) {
-		if(name === '' || image === '' || category === '' ||
-		price === '' || old_price === '' || sizes === '' || available === '') {
-			e.preventDefault()
-			setErro('Preencha todos os campos')
-			return
-		}
-		const controller = new AbortController()
-		e.preventDefault()
-		try {
-			instanceAxios.put(`/product/${params.id}`, {
-				name,
-				image,
-				category,
-				price,
-				old_price,
-				available,
-				sizes: sizes.toUpperCase().replace( /[^a-zA-Z0-9]/g, '').split('')
-			})
-				.then(() => window.location.href='/manager/all')
-				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
-				})
-			setLoading(false)
-
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
-
 	useEffect(() => {
-		GetProduct()
+		GetProduct(params)
 	},[])
 
 	if(loading) {
@@ -105,7 +104,7 @@ export function UpdateProduct() {
 			<input
 				value={old_price}
 				placeholder='Preço antigo'
-				onChange={(e) => setOld_price(e.target.value.replace(',','.'))}
+				onChange={(e) => setOldPrice(e.target.value.replace(',','.'))}
 			/>
 			<input
 				placeholder='Tamanhos (P, M, G)'
@@ -128,7 +127,7 @@ export function UpdateProduct() {
 					: 
 					''
 			}
-			<button onClick={(e) => UpdateProduct(e)}>
+			<button onClick={(e) => Verify(e)}>
                 Atualizar
 			</button>
 		</S.Form>

@@ -1,42 +1,16 @@
-import { instanceAxios } from '../../helper/instanceAxios'
 import { IoClose } from 'react-icons/io5'
-import { ProductProps } from '../../context/homePageContext'
-import { useEffect, useState } from 'react'
+import { useProductsContext } from '../../context/productsContext'
+import { useEffect } from 'react'
 import { LoadingCard } from '../loadingCard'
 import { FaPencilAlt } from 'react-icons/fa'
 
 export function UnavailableProduct() {
-	const [ data, setData ] = useState<ProductProps[]>([])
-	const [ loading, setLoading ] = useState(true)
-	
-	function FetchUnavailableProducts() {
-		const controller = new AbortController()
-	
-		try {
-			instanceAxios.get('/products/unavailables')
-				.then((data) => setData(data.data[0]))
-				.catch((erro) => console.log(erro))
-			setLoading(false)
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
-
-	function RemoveProduct(id: string) {
-		const controller = new AbortController()
-	
-		try {
-			instanceAxios.delete(`/product/${id}`)
-				.then()
-				.catch()
-			setLoading(false)
-			window.location.href='/manager/all'
-		} catch (error) {
-			console.log(error)
-			controller.abort()
-		}
-	}
+	const {
+		loading,
+		unavailableProducts,
+		RemoveProduct,
+		FetchUnavailableProducts
+	} = useProductsContext()
 
 	useEffect(() => {
 		FetchUnavailableProducts()
@@ -51,7 +25,7 @@ export function UnavailableProduct() {
 		<>
 		
 			{
-				Array.isArray(data) ?
+				Array.isArray(unavailableProducts) ?
 					<table>
 						<thead>
 							<tr>
@@ -65,7 +39,7 @@ export function UnavailableProduct() {
 						</thead>
 						<tbody>
 							{
-								data.map((item) => (
+								unavailableProducts.map((item) => (
 									<>
 										<tr
 											key={item.id}

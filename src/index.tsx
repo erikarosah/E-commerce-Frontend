@@ -1,7 +1,7 @@
 import React from 'react'
 import { GlobalStyle } from './style/global-style'
 import ReactDOM from 'react-dom/client'
-import { ProductsContextProvider } from './context/homePageContext'
+import { ProductsContextProvider } from './context/productsContext'
 import { AppRoutes } from './routes'
 import { ProductsPageContextProvider } from './context/productsPageContext'
 import { ProductPageDetailContextProvider } from './context/detailPageContext'

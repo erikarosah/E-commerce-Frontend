@@ -10,15 +10,19 @@ import { FaChevronLeft } from 'react-icons/fa'
 
 export function Products() {
 	const params = useParams()
-
 	const { 
 		data,
+		page,
 		title,
 		loading,
-		page,
 		SearchByFilter,
 		setPage,
 	} = useProductsPageContext()
+
+	function HandleSearchByFilter(value: string){
+		window.location.href=`/products/${params.query}/${value}`
+		SearchByFilter(params)
+	}
 
 	useEffect(() => {
 		SearchByFilter(params)
@@ -31,14 +35,10 @@ export function Products() {
 		})
 	},[page])
 	
-	function HandleSearchByFilter(value: string){
-		window.location.href=`/products/${params.query}/${value}`
-		SearchByFilter(params)
-	}
-
 	if(loading) {
 		return (<LoadingCard/>)
-	}	
+	}
+		
 	return (
 		<>
 			<Header/>
