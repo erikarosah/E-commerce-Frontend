@@ -9,6 +9,8 @@ import { UnavailableProduct } from '../components/unavailableProduct'
 import { Manager } from '../pages/manager'
 import { UpdateProduct } from '../components/updateProduct'
 import { NotFound } from '../pages/notFound'
+import { Success } from '../pages/success'
+import { Cancel } from '../pages/cancel'
 
 export function AppRoutes() {
 	return (
@@ -16,12 +18,17 @@ export function AppRoutes() {
 			<Routes>
 				<Route path="/" element={<Home/>}/> 
 				<Route path="/session" element={<Session/>}/> 
+
+				<Route path="/success" element={<Success/>}/> 
+				<Route path="/cancel" element={<Cancel/>}/> 
+				<Route path="/notfound" element={<NotFound/>}/> 
+
 				<Route path="/products" element={<Products/>}/> 
 				<Route path="/products/name/:query" element={<Products/>}/> 
 				<Route path="/products/:query/:category" element={<Products/>}/> 
 				<Route path="/products/:category" element={<Products/>}/> 
 				<Route path="/product/:id" element={<Details/>}/> 
-				<Route path="/notfound" element={<NotFound/>}/> 
+
 				<Route path="/manager" element={<Manager/>}>
 					<Route
 						path="all"
