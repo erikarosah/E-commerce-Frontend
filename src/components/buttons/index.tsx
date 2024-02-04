@@ -1,20 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './style'
 import { useCartContext } from '../../context/cartContext'
+import { ProductCartProps } from '../../context/productsContext'
 
 interface ButtonsProps {
     price: number,
-    id: string
+    id: string,
+	quantity?: number,
+	item: ProductCartProps
 }
 
 export function Buttons(props : ButtonsProps){
-	const [ totalAdded, setTotalAdded ] = useState(1)
 	const [ price, setPrice ] = useState(props.price)
+	const [ totalAdded, setTotalAdded ] = useState(1)
+
 	const {
 		openModal,
 		Sum,
 		Subtraction,
-		RemoveToCart
+		RemoveToCart,
+		allProducts,
 	} = useCartContext()
 
 	function handleAdd() {
@@ -36,9 +41,16 @@ export function Buttons(props : ButtonsProps){
 		}
 
 		setPrice(price - props.price)
-		setTotalAdded((prev) => prev - 1)
+		setTotalAdded(totalAdded - 1)
 		Subtraction(props.price)
 	}
+
+	useEffect(() => {
+		Object.assign(props.item, {quantity: totalAdded})
+		const index = allProducts.findIndex((item) => item.id === props.id)
+		allProducts.splice(index, 1, props.item)
+
+	},[totalAdded])
 
 	return (
 		<S.Container openmodal={openModal}>

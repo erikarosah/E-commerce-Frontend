@@ -6,16 +6,9 @@ import { useProductsPageContext } from '../../context/productsPageContext'
 import { useCartContext } from '../../context/cartContext'
 import { useEffect } from 'react'
 import { Buttons } from '../buttons'
+import { instanceAxios } from '../../helper/instanceAxios'
 
 export function Header(){
-	function handleLogout() {
-		localStorage.removeItem('user')
-		localStorage.removeItem('token')
-		localStorage.removeItem('role')
-		localStorage.removeItem('products')
-		location.reload()
-	}
-
 	const {
 		isAnimated,
 		allProducts,
@@ -29,6 +22,33 @@ export function Header(){
 	const { 
 		setPage
 	} = useProductsPageContext()
+
+	function handleLogout() {
+		localStorage.removeItem('user')
+		localStorage.removeItem('token')
+		localStorage.removeItem('role')
+		localStorage.removeItem('products')
+		location.reload()
+	}
+	
+	const MakePayment = async () => {
+		const data = allProducts.map((item) => ({
+			name: item.name,
+			image: item.image,
+			price: item.price,
+			quantity: item.quantity,
+		}))
+	
+		try {
+			instanceAxios.post('/create-checkout-session', {
+				data,
+			})
+				.then((data) => window.location.href=`${data.data.url}`)
+				.catch((error) => console.log(error))
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	useEffect(() => {
 		if(products){
@@ -109,6 +129,8 @@ export function Header(){
 							<Buttons
 								id={item.id}
 								price={item.price}
+								quantity={item.quantity}
+								item={item}
 							/>
 						</div>
 					)): ''
@@ -116,6 +138,7 @@ export function Header(){
 				<S.Total>
 					Total: {total.toFixed(2).replace('.',',')}
 				</S.Total>
+				<button onClick={MakePayment}>Pagar</button>
 			</S.Modal>
 		</S.Container>
 	)

@@ -10,7 +10,15 @@ export interface ProductProps {
 	name: string,
 	old_price: number,
 	price: number,
-	sizes: string[]
+	sizes: string[],
+}
+
+export interface ProductCartProps {
+	id: string,
+	image: string,
+	name: string,
+	price: number,
+	quantity?: number
 }
 
 interface ChildrenProps {

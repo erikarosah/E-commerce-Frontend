@@ -1,34 +1,31 @@
 import { useContext, useState, createContext } from 'react'
-import { ProductProps } from './productsContext'
+import { ProductCartProps, ProductProps } from './productsContext'
 
 interface ChildrenProps {
     children: React.ReactNode;
 }  
 
 interface CartContextProps {
-    added: number,
 	total: number,
 	isAnimated: boolean,
 	openModal: boolean,
 	products: string | null,
-	allProducts: ProductProps[],
+	allProducts: ProductCartProps[],
 	StartAnimation: () => void,
 	Sum: (value: number) => void,
-    setAdded: (value: number) => void,
 	Subtraction: (value: number) => void,
 	RemoveToCart: (value: string) => void,
     setOpenModal: (value: boolean) => void,
-    AddToCart: (data: ProductProps) => void,
-	setAllProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>,
+    AddToCart: (data: ProductCartProps) => void,
+	setAllProducts: React.Dispatch<React.SetStateAction<ProductCartProps[]>>,
 }
 
 const CartContext = createContext<CartContextProps>({} as CartContextProps)
 
 export function CartContextProvider({children}: ChildrenProps){
-	const [ added, setAdded ] = useState(0)
 	const [ isAnimated, setAnimated ] = useState(false)
 	const [ openModal, setOpenModal ] = useState(false)
-	const [ allProducts, setAllProducts ] = useState<ProductProps[]>([])
+	const [ allProducts, setAllProducts ] = useState<ProductCartProps[]>([])
 
 	const products = localStorage.getItem('products')
 
@@ -55,14 +52,16 @@ export function CartContextProvider({children}: ChildrenProps){
 		setTimeout(() => setAnimated(false), 1000)
 	}
 
-	const AddToCart = (data: ProductProps) => {
+	const AddToCart = (data: ProductCartProps) => {
 		if(!localStorage.getItem('user')) {
 			window.location.href='/session'
 			return
 		}
-
+		
+		Object.assign(data, {quantity: 1})
+		
 		if(products) {
-			const oldArray: ProductProps[] = JSON.parse(products) || []
+			const oldArray: ProductCartProps[] = JSON.parse(products) || []
 			const productAlreadyAdded = oldArray.find((item) => item.id === data.id)
 
 			if(productAlreadyAdded) {
@@ -81,7 +80,6 @@ export function CartContextProvider({children}: ChildrenProps){
 
 			setTotal(newTotal) 
 			StartAnimation()
-			
 			return setAllProducts(updatedArray)
 		}
 
@@ -91,7 +89,7 @@ export function CartContextProvider({children}: ChildrenProps){
 
 	function RemoveToCart(id: string) {
 		if(products) {
-			const oldArray: ProductProps[] = JSON.parse(products) || []
+			const oldArray: ProductCartProps[] = JSON.parse(products) || []
 			const index = oldArray.findIndex((item) => item.id === id)
 			oldArray.splice(index, 1)
 
@@ -109,16 +107,15 @@ export function CartContextProvider({children}: ChildrenProps){
 		setTotal(prev => prev - number)
 	}
 
+
 	return(
 		<CartContext.Provider value={{  
-			added,
 			total,
 			products,
 			openModal,
 			isAnimated,
 			allProducts,
 			Sum,
-			setAdded,
 			AddToCart,
 			Subtraction,
 			RemoveToCart,

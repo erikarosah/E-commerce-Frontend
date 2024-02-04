@@ -1,4 +1,5 @@
 import React from 'react'
+import '@stripe/stripe-js' 
 import { GlobalStyle } from './style/global-style'
 import ReactDOM from 'react-dom/client'
 import { ProductsContextProvider } from './context/productsContext'
