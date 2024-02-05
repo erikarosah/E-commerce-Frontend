@@ -1,9 +1,7 @@
-import { Header } from '../../components/header'
 import * as S from './style'
-import BannerImage1 from '../../assets/banner-1-dt.jpg'
-import BannerImage2 from '../../assets/banner-2-dt.jpg'
-import { Card } from '../../components/card'
 import { useEffect, useState } from 'react'
+import { Header } from '../../components/header'
+import { Card } from '../../components/card'
 import { useProductsContext } from '../../context/productsContext'
 import { Footer } from '../../components/footer'
 import { IoSearchOutline } from 'react-icons/io5'
@@ -51,10 +49,7 @@ export function Home() {
 			<Header/>
 			<S.Container>
 				<Link to='/products/kids'>
-					<S.Banner
-						src={BannerImage1}
-						alt='banner'
-					/>
+					<S.Banner></S.Banner>
 				</Link>
 				<S.SearchContainer>
 					<S.Category>
@@ -101,10 +96,7 @@ export function Home() {
 					} 
 				</S.Content>
 				<Link to='/products/jeans/fem'>
-					<S.BannerPromotion
-						src={BannerImage2}
-						alt=''
-					/>
+					<S.BannerPromotion></S.BannerPromotion>
 				</Link>
 				<S.Title>	
 					Novas coleções

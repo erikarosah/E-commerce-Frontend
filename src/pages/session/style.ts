@@ -57,6 +57,11 @@ export const Content = styled.form`
             color: #61c291;
         }
     }
+
+    
+    @media (max-width: 688px) {
+       width: 90vw;
+    }
 `
 
 export const Buttons = styled.div`

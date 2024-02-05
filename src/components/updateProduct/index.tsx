@@ -1,9 +1,9 @@
 import * as S from './style'
-import { LoadingCard } from '../loadingCard'
 import { useEffect, useState } from 'react'
 import { Params, useParams } from 'react-router-dom'
-import { useProductsContext } from '../../context/productsContext'
+import { LoadingCard } from '../loadingCard'
 import { instanceAxios } from '../../helper/instanceAxios'
+import { useProductsContext } from '../../context/productsContext'
 
 export function UpdateProduct() {
 	const params = useParams()

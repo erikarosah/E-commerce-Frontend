@@ -5,6 +5,12 @@ export const Container = styled.main`
     height: 90vh;
     width: 95vw;
     display: flex;
+
+    @media (max-width: 834px) {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
 `
 
 export const SideMenu = styled.aside`
@@ -30,6 +36,24 @@ export const SideMenu = styled.aside`
             }
         }
     }
+
+    @media (max-width: 834px) {
+        width: 100%;
+
+        > ul {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+    }
+
+    @media (max-width: 420px) {
+      > ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
 `
 
 export const Products = styled.div`
@@ -40,5 +64,9 @@ export const Products = styled.div`
 
     > h1 {
         font-weight: normal;
+    }
+
+    @media (max-width: 834px) {
+       text-align: center;
     }
 `

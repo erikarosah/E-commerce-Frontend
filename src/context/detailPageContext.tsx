@@ -11,17 +11,20 @@ interface ContextProps {
 	value: boolean,
 	freight: boolean,
     data: ProductProps,
+    openMenu: boolean,
     ShowValue: () => void
+    setOpenMenu: (value: boolean) => void
     FetchData: (params: Readonly<Params<string>>) => void,
     HandleFreight: (e: ChangeEvent<HTMLInputElement>, cep: string) => void,
 }
 
-const ProductPageDetailContext = createContext<ContextProps>({} as ContextProps)
+const DetailPageContext = createContext<ContextProps>({} as ContextProps)
 
-export function ProductPageDetailContextProvider({children}: ChildrenProps){
+export function DetailPageContextProvider({children}: ChildrenProps){
 	const [ data, setData ] = useState<ProductProps>({} as ProductProps)
 	const [ freight, setFreight ] = useState(false)
 	const [ value, setValue ] = useState(false)
+	const [ openMenu, setOpenMenu ] = useState(false)
 
 	async function FetchData(params: Readonly<Params<string>>) {
 		const controller = new AbortController()
@@ -30,8 +33,7 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 			instanceAxios.get(`/product/${params.id}`)
 				.then((data) => setData(data.data[0]))
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 
 		} catch (error) {
@@ -56,17 +58,19 @@ export function ProductPageDetailContextProvider({children}: ChildrenProps){
 	}
 
 	return(
-		<ProductPageDetailContext.Provider value={{  
+		<DetailPageContext.Provider value={{  
 			data,
 			value,
 			freight,
+			openMenu,
+			setOpenMenu,
 			FetchData,
 			ShowValue,
 			HandleFreight
 		}}>
 			{children}
-		</ProductPageDetailContext.Provider>
+		</DetailPageContext.Provider>
 	)
 }
 
-export const useProductsPageDetailContext = () => useContext(ProductPageDetailContext)
+export const useDetailPageContext = () => useContext(DetailPageContext)

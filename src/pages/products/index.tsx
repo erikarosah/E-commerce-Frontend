@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom'
-import { Header } from '../../components/header'
 import * as S from './style'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Header } from '../../components/header'
 import { Card } from '../../components/card'
 import { useProductsPageContext } from '../../context/productsPageContext'
 import { LoadingCard } from '../../components/loadingCard'
@@ -10,6 +10,7 @@ import { FaChevronLeft } from 'react-icons/fa'
 
 export function Products() {
 	const params = useParams()
+	
 	const { 
 		data,
 		page,
@@ -70,7 +71,7 @@ export function Products() {
 				}
 				<S.Content>	
 					{
-						data.slice((page - 1) * 10, page * 10).map((item) => (
+						Array.isArray(data)?  data.slice((page - 1) * 10, page * 10).map((item) => (
 							<Card
 								key={item.id}
 								id={item.id}
@@ -79,7 +80,7 @@ export function Products() {
 								price={item.price}
 								old_price={item.old_price}
 							/>
-						))
+						)): <h2>Desculpe, não temos esse produto no catálogo, faça uma nova busca!</h2>
 					}
 				</S.Content>
 				<S.Buttons>

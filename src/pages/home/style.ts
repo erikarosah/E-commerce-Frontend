@@ -1,12 +1,21 @@
 import styled from 'styled-components'
+import BannerImage1 from '../../assets/banner-1-dt.jpg'
+import BannerImage2 from '../../assets/banner-2-dt.jpg'
+import BannerImageMobile1 from '../../assets/banner-1-mb.jpg'
+import BannerImageMobile2 from '../../assets/banner-2-mb.jpg'
 
 export const Container = styled.main`
     width: 100%;
+    max-width: 1600px;
     display: flex;
     flex-direction: column;
 
     > a {
         align-self: center;
+    }
+
+    @media (max-width: 420px) {
+        overflow: hidden;
     }
 `
 export const SearchContainer = styled.div`
@@ -18,6 +27,13 @@ export const SearchContainer = styled.div`
     align-self: center;
     padding: 0 0 1rem 0;
     border-bottom: 1px solid #E0E0E0;
+
+    @media (max-width: 769px) {
+        width: fit-content;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
 `
 export const Category = styled.ul`
     width: 100%;
@@ -57,34 +73,82 @@ export const Search = styled.div`
         font-size: 1.4rem;
         cursor: pointer;
     }
+
+    @media (max-width: 769px) {
+        width: 100%
+    }
 `
 
-export const Banner = styled.img`
-    width: 100%;
-    margin-top: 10vh;
+export const Banner = styled.div`
+    min-width: 98.7vw;
     height: 80vh;
+    margin-top: 10vh;
     cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(${BannerImage1});
+
+    
+    @media (max-width: 1024px) {
+        height: 50vh;
+    }
+
+    @media (max-width: 835px) {
+        height: 30vh;
+        margin-top: 7vh;
+    }
+
+    @media (max-width: 800px) {
+        height: 60vh;
+        background-image: url(${BannerImageMobile1});
+    }
+
 `
-export const BannerPromotion = styled.img`
+export const BannerPromotion = styled.div`
     align-self: center;
-    width: 67vw;
-    height: auto;
+    width: 76vw;
+    height: 55vh;
     cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(${BannerImage2});
+    margin: 5rem 0;
+    
+    @media (max-width: 1024px) {
+        height: 40vh;
+    }
+
+    @media (max-width: 835px) {
+        width: 68vw;
+        height: 20vh;
+    }
+
+    @media (max-width: 800px) {
+        height: 50vh;
+        background-image: url(${BannerImageMobile2});
+    }
+
+    @media (max-width: 769px) {
+        height: 60vh;
+        background-image: url(${BannerImageMobile2});
+    }
 `
 
 export const Content = styled.div`
-    max-width: 68vw;
-    min-height: 75vh;
+    max-width: 80vw;
+    min-width: 80vw;
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-self: center;
     gap: 1rem;
-    margin-top: 4rem;
+    margin: 5rem 0;
 `
 export const Title = styled.h2`
-    margin-top: 10vh;
+    margin-top: 5rem;
     width: fit-content;
     height: fit-content;
     text-transform: uppercase;

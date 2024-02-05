@@ -37,4 +37,16 @@ export const Form = styled.form`
         margin-bottom: 2rem;
     }
 
+    @media (max-width: 834px) {
+        display: flex;
+        align-items: center;
+
+        > input {
+            width: 80vw;
+        }
+
+        > button {
+            width: 80vw;
+        }
+    }
 `

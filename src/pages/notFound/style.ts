@@ -13,5 +13,9 @@ export const Container = styled.div`
         cursor: pointer;
         font-size: 1.4rem;
     }
+
+    @media (max-width: 420px) {
+        text-align: center;
+    }
     
 `

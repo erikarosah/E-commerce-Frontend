@@ -40,10 +40,10 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 						setLoading(false)
 					})
 					.catch(() => {
-						alert('Ocorreu um erro, por favor tente novamente mais tarde')
-						window.location.href='/'
+						window.location.href='/notfound'
 					})
 			} catch (error) {
+				window.location.href='/notfound'
 				console.log(error)
 				controller.abort()
 			}
@@ -74,11 +74,11 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 						setLoading(false)
 					})
 					.catch(() => {
-						alert('Ocorreu um erro, por favor tente novamente mais tarde')
-						window.location.href='/'
+						window.location.href='/notfound'
 					})
 				setTitle(params.query.toUpperCase())
 			}catch (error) {
+				window.location.href='/notfound'
 				console.log(error)
 				controller.abort()
 			}
@@ -94,8 +94,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 						setLoading(false)
 					})
 					.catch(() => {
-						alert('Ocorreu um erro, por favor tente novamente mais tarde')
-						window.location.href='/'
+						window.location.href='/notfound'
 					})
 				switch(params.category) {
 				case 'fem': 
@@ -110,6 +109,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 				}
 				return
 			}catch (error) {
+				window.location.href='/notfound'
 				console.log(error)
 				controller.abort()
 			}
@@ -124,8 +124,7 @@ export function ProductsPageContextProvider({children}: ChildrenProps){
 				setLoading(false)
 			})
 			.catch(() => {
-				alert('Ocorreu um erro, por favor tente novamente mais tarde')
-				window.location.href='/'
+				window.location.href='/notfound'
 			})
 	}
 

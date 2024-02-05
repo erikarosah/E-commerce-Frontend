@@ -1,12 +1,14 @@
 import * as S from './style'
-import CartImage from '../../assets/cart.png'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaGear } from 'react-icons/fa6'
 import { useProductsPageContext } from '../../context/productsPageContext'
 import { useCartContext } from '../../context/cartContext'
-import { useEffect } from 'react'
-import { Buttons } from '../buttons'
-import { instanceAxios } from '../../helper/instanceAxios'
+import { MenuMobile } from '../menuMobile'
+import { FaGear } from 'react-icons/fa6'
+import { IoIosMenu } from 'react-icons/io'
+import CartImage from '../../assets/cart.png'
+import { ModalCart } from '../modalCart'
+import { useDetailPageContext } from '../../context/detailPageContext'
 
 export function Header(){
 	const {
@@ -16,40 +18,27 @@ export function Header(){
 		total,
 		openModal,
 		setOpenModal,
-		setAllProducts
+		setAllProducts,
+		MakePayment
 	} = useCartContext()
 	
 	const { 
-		setPage
+		setPage,
 	} = useProductsPageContext()
+
+	const { 
+		openMenu, 
+		setOpenMenu
+	} = useDetailPageContext()
 
 	function handleLogout() {
 		localStorage.removeItem('user')
 		localStorage.removeItem('token')
 		localStorage.removeItem('role')
 		localStorage.removeItem('products')
-		location.reload()
+		window.location.href='/'
 	}
 	
-	const MakePayment = async () => {
-		const data = allProducts.map((item) => ({
-			name: item.name,
-			image: item.image,
-			price: item.price,
-			quantity: item.quantity,
-		}))
-	
-		try {
-			instanceAxios.post('/create-checkout-session', {
-				data,
-			})
-				.then((data) => window.location.href=`${data.data.url}`)
-				.catch((error) => console.log(error))
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
 	useEffect(() => {
 		if(products){
 			const data = JSON.parse(products)
@@ -59,12 +48,12 @@ export function Header(){
 
 	return (
 		<S.Container>
+			<IoIosMenu onClick={() => setOpenMenu(!openMenu)}/>
 			<Link to='/'>
 				<S.Logo>
 					<h1>Be you</h1>
 				</S.Logo>
 			</Link>
-
 			<S.Section>
 				<Link to='/'>
 					<S.Items>Shop</S.Items>
@@ -88,7 +77,7 @@ export function Header(){
 					</S.Items>
 				</Link>
 			</S.Section>
-
+			<MenuMobile/>
 			<div>
 				{
 					localStorage.getItem('user') ?
@@ -116,30 +105,7 @@ export function Header(){
 						/>
 				}
 			</div>
-			<S.Modal openmodal={openModal}>
-				{
-					allProducts? allProducts.map((item) => (
-						<div key={item.id}>
-							<img
-								src={item.image}
-								alt={item.name}
-							/>
-							<p>{item.name}</p>
-						
-							<Buttons
-								id={item.id}
-								price={item.price}
-								quantity={item.quantity}
-								item={item}
-							/>
-						</div>
-					)): ''
-				}
-				<S.Total>
-					Total: {total.toFixed(2).replace('.',',')}
-				</S.Total>
-				<button onClick={MakePayment}>Pagar</button>
-			</S.Modal>
+			<ModalCart/>
 		</S.Container>
 	)
 }

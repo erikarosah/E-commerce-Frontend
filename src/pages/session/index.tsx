@@ -1,8 +1,8 @@
-import { Header } from '../../components/header'
 import * as S from './style'
+import { Header } from '../../components/header'
+import { useSessionContext } from '../../context/sessionContext'
 import { PiBagSimpleFill } from 'react-icons/pi'
 import { FaUser } from 'react-icons/fa6'
-import { useSessionContext } from '../../context/sessionContext'
 
 export function Session() {
 	const {

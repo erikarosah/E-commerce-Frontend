@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom/client'
 import { ProductsContextProvider } from './context/productsContext'
 import { AppRoutes } from './routes'
 import { ProductsPageContextProvider } from './context/productsPageContext'
-import { ProductPageDetailContextProvider } from './context/detailPageContext'
 import { SessionContextProvider } from './context/sessionContext'
 import { CartContextProvider } from './context/cartContext'
+import { DetailPageContextProvider } from './context/detailPageContext'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,13 +17,13 @@ root.render(
 		<GlobalStyle/>
 		<ProductsContextProvider>
 			<ProductsPageContextProvider>
-				<ProductPageDetailContextProvider>
+				<DetailPageContextProvider>
 					<SessionContextProvider>
 						<CartContextProvider>
 							<AppRoutes/>
 						</CartContextProvider>
 					</SessionContextProvider>
-				</ProductPageDetailContextProvider>
+				</DetailPageContextProvider>
 			</ProductsPageContextProvider>
 		</ProductsContextProvider>
 	</React.StrictMode>

@@ -1,11 +1,11 @@
 import * as S from './style'
 import LogoImage from '../../assets/logo.png'
+import { Link } from 'react-router-dom'
 import { FaInstagram } from 'react-icons/fa'
 import { CiFacebook } from 'react-icons/ci'
 import { FaWhatsapp } from 'react-icons/fa6'
 import { FiGithub } from 'react-icons/fi'
 import { FaLinkedinIn } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
 
 export function Footer(){
 	return(

@@ -38,6 +38,26 @@ export const Container = styled.header`
             cursor: pointer;
         }
     }
+
+    > svg {
+        display: none;
+    }
+
+    @media (max-width: 1024px) {
+      height: 80px;
+    }
+
+    @media (max-width: 688px) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      
+      > svg {
+            display: flex;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    }
 `
 
 export const Logo = styled.div`
@@ -47,10 +67,16 @@ export const Logo = styled.div`
     font-size: 1.5rem;
     text-transform: uppercase;
 
-    h1 {
+    > h1 {
         font-family: 'Kalam', sans-serif;
         color: #2B2C2D;
         letter-spacing: 1rem;       
+    }
+
+    @media (max-width: 800px) {
+    > h1 {
+        font-size: 1.2rem;
+      }
     }
 `
 
@@ -59,6 +85,10 @@ export const Section = styled.ul`
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
+
+    @media (max-width: 688px) {
+      display: none;
+    }
 `
 
 export const Items = styled.li`
@@ -102,49 +132,4 @@ export const Cart = styled.img`
     &:hover {
         transform: scale(1.02);
     }
-`
-
-export const Modal = styled.div<{ openmodal: boolean }>`
-    width: 50rem;
-    height: auto;
-    position: absolute;
-    visibility: ${(props) => props.openmodal ? 'visible' : 'hidden'};
-    flex-direction: column;
-    background-color: #F2F2F2;
-    top: 7rem;
-    right: 2rem;
-    border-radius: 5px;
-    padding: 2rem;
-
-    > div {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        > img {
-            width: 30px;
-            height: auto;
-        }
-
-        > p {
-            max-width: 150px;
-            font-size: 1.2rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-
-    div:not(:last-child) {
-        padding-bottom: 2rem;
-        border-bottom: 1px solid #E0E0E0;
-    }
-`
-
-export const Total = styled.h4`
-    align-self: flex-start;
-    font-size: 1.2rem;
 `

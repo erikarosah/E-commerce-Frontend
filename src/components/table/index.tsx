@@ -1,12 +1,12 @@
+import * as S from './style'
 import { useEffect, useState } from 'react'
+import { LoadingCard } from '../loadingCard'
+import { useProductsContext } from '../../context/productsContext'
 import { IoCheckmarkSharp } from 'react-icons/io5'
 import { IoClose } from 'react-icons/io5'
-import { LoadingCard } from '../loadingCard'
 import { FaChevronRight } from 'react-icons/fa'
 import { FaChevronLeft } from 'react-icons/fa'
 import { FaPencilAlt } from 'react-icons/fa'
-import * as S from './style'
-import { useProductsContext } from '../../context/productsContext'
 
 export function Table() {
 	const [ page, setPage ] = useState(1)

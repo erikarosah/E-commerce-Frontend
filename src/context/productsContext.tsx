@@ -81,8 +81,7 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			})
 				.then(() => window.location.href='/manager/all')
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 			setLoading(false)
 
@@ -99,20 +98,17 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			instanceAxios.get('/products/fem')
 				.then((data) => setPopularFemProducts(data.data[0]))
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 			instanceAxios.get('/products/masc')
 				.then((data) => setPopularMascProducts(data.data[0]))
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 			instanceAxios.get('/products/kids')
 				.then((data) => setPopularKidsProducts(data.data[0]))
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 			setLoading(false)
 		} catch (error) {
@@ -132,8 +128,7 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			instanceAxios.get('/products')
 				.then((data) => setAllProducts(data.data[0]))
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 			setLoading(false)
 		} catch (error) {
@@ -148,7 +143,7 @@ export function ProductsContextProvider({children}: ChildrenProps){
 		try {
 			instanceAxios.get('/products/unavailables')
 				.then((data) => setUnavailableProducts(data.data[0]))
-				.catch((erro) => console.log(erro))
+				.catch(() => window.location.href='/notfound')
 			setLoading(false)
 		} catch (error) {
 			console.log(error)
@@ -163,8 +158,7 @@ export function ProductsContextProvider({children}: ChildrenProps){
 			instanceAxios.delete(`/product/${id}`)
 				.then()
 				.catch(() => {
-					alert('Ocorreu um erro, por favor tente novamente mais tarde')
-					window.location.href='/'
+					window.location.href='/notfound'
 				})
 			setLoading(false)
 			window.location.href='/manager/all'

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import * as S from './style'
+import { Link } from 'react-router-dom'
 
 export function NotFound() {	
 	return (

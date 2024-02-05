@@ -1,5 +1,6 @@
 import { useContext, useState, createContext } from 'react'
 import { ProductCartProps, ProductProps } from './productsContext'
+import { instanceAxios } from '../helper/instanceAxios'
 
 interface ChildrenProps {
     children: React.ReactNode;
@@ -18,6 +19,7 @@ interface CartContextProps {
     setOpenModal: (value: boolean) => void,
     AddToCart: (data: ProductCartProps) => void,
 	setAllProducts: React.Dispatch<React.SetStateAction<ProductCartProps[]>>,
+	MakePayment:() => void
 }
 
 const CartContext = createContext<CartContextProps>({} as CartContextProps)
@@ -107,6 +109,24 @@ export function CartContextProvider({children}: ChildrenProps){
 		setTotal(prev => prev - number)
 	}
 
+	const MakePayment = async () => {
+		const data = allProducts.map((item) => ({
+			name: item.name,
+			image: item.image,
+			price: item.price,
+			quantity: item.quantity,
+		}))
+	
+		try {
+			instanceAxios.post('/create-checkout-session', {
+				data,
+			})
+				.then((data) => window.location.href=`${data.data.url}`)
+				.catch((error) => console.log(error))
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return(
 		<CartContext.Provider value={{  
@@ -122,6 +142,7 @@ export function CartContextProvider({children}: ChildrenProps){
 			setOpenModal,
 			StartAnimation,
 			setAllProducts,
+			MakePayment
 		}}>
 			{children}
 		</CartContext.Provider>

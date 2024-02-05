@@ -29,4 +29,22 @@ export const Form = styled.form`
         }
     }
 
+    @media (max-width: 834px) {
+        display: flex;
+        align-items: center;
+       
+        > h3 {
+          padding: 0;
+        }
+
+        
+        > input {
+            width: 80vw;
+        }
+
+        > button {
+            width: 80vw;
+        }
+    }
+
 `

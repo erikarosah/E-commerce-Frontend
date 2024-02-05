@@ -17,9 +17,16 @@ export const Container = styled.div<{ openmodal: boolean }>`
         border-radius: 50%;
         cursor: pointer;
         background-color: #c5c8c4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     > span:first-child {
         margin-right: 2rem;
+    }
+
+    @media (max-width: 420px) {
+      width: 45%
     }
 `

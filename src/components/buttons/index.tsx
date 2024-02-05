@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
 import * as S from './style'
+import { useEffect, useState } from 'react'
 import { useCartContext } from '../../context/cartContext'
 import { ProductCartProps } from '../../context/productsContext'
 
 interface ButtonsProps {
+	id: string,
     price: number,
-    id: string,
 	quantity?: number,
 	item: ProductCartProps
 }
@@ -16,10 +16,10 @@ export function Buttons(props : ButtonsProps){
 
 	const {
 		openModal,
+		allProducts,
 		Sum,
 		Subtraction,
 		RemoveToCart,
-		allProducts,
 	} = useCartContext()
 
 	function handleAdd() {

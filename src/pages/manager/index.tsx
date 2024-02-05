@@ -1,5 +1,5 @@
-import { Header } from '../../components/header'
 import * as S from './style'
+import { Header } from '../../components/header'
 import { Link, Outlet } from 'react-router-dom'
 
 export function Manager() {

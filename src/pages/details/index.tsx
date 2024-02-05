@@ -1,13 +1,13 @@
-import { useParams } from 'react-router-dom'
-import { Header } from '../../components/header'
 import * as S from './style'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Header } from '../../components/header'
 import { Sizes } from '../../components/sizes'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { FaFacebook } from 'react-icons/fa6'
 import { FaPinterest } from 'react-icons/fa'
-import { useProductsPageDetailContext } from '../../context/detailPageContext'
 import { useCartContext } from '../../context/cartContext'
+import { useDetailPageContext } from '../../context/detailPageContext'
 
 export function Details() {
 	const params = useParams()
@@ -19,7 +19,7 @@ export function Details() {
 		freight,
 		data,
 		value
-	} =  useProductsPageDetailContext()
+	} =  useDetailPageContext()
 
 	const {
 		AddToCart

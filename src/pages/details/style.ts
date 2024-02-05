@@ -8,16 +8,37 @@ export const Container = styled.main`
     display: flex;
     justify-content: space-around;
     gap: 2rem;
+
+    @media (max-width: 835px) {
+        height: fit-content;
+    }
+
+    @media (max-width: 420px) {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 0 2rem;
+    }
+
 `
 export const Image = styled.img`
-    max-width: 39rem;
+    width: 39rem;
     height: auto;
+
+    @media (max-width: 835px) {
+      width: 30rem;
+    }
+
+    @media (max-width: 420px) {
+      width: 60vw;
+    }
 `
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    
     > h3 {
         display: flex;
         
@@ -32,6 +53,12 @@ export const Content = styled.div`
             cursor: pointer;
         }
     }
+
+    @media (max-width: 420px) {
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
 `
 export const Prices = styled.div`
     > h2 {
